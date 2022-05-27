@@ -14,6 +14,7 @@
         android:src="@drawable/river" />
 
     <TextView
+        android:id="@+id/appNameText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
@@ -26,6 +27,7 @@
         android:textStyle="bold" />
 
     <TextView
+        android:id="@+id/appSloganText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
@@ -38,7 +40,7 @@
         android:textStyle="bold"/>
 
     <Button
-        android:id="@+id/login"
+        android:id="@+id/loginButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
