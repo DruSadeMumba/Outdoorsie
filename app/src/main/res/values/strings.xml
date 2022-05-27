@@ -2,4 +2,5 @@
     <string name="app_name">Outdoorsie</string>
     <string name="bg1">bg1</string>
     <string name="adventure">Home of Adventure</string>
+    <string name="login_button">LOGIN</string>
 </resources>
