@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Outdoorsie</string>
+    <string name="bg1">bg1</string>
+    <string name="adventure">Home of Adventure</string>
 </resources>
