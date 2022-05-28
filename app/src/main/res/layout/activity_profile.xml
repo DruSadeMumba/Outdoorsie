@@ -6,11 +6,12 @@
     android:layout_height="match_parent"
     tools:context=".ProfileActivity">
 
-  <com.google.android.material.bottomnavigation.BottomNavigationView
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:id="@+id/bottomNav"
-      android:layout_alignParentBottom="true"
-      android:padding="15dp"/>
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNav"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:padding="10dp"
+        app:menu="@menu/bottom_navbar_menu"/>
 
 </RelativeLayout>

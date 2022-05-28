@@ -3,11 +3,14 @@
 
     <item
         android:id="@+id/activities"
-        android:title="@string/activities"/>
+        android:title="@string/activities"
+        android:icon="@drawable/ic_baseline_home_24"/>
     <item
         android:id="@+id/profile"
-        android:title="@string/profile"/>
+        android:title="@string/profile"
+        android:icon="@drawable/ic_baseline_person_24"/>
     <item
         android:id="@+id/exit"
-        android:title="@string/exit"/>
+        android:title="@string/exit"
+        android:icon="@drawable/ic_baseline_exit_to_app_24"/>
 </menu>
