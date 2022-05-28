@@ -6,12 +6,20 @@
     android:layout_height="match_parent"
     tools:context=".ProfileActivity">
 
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/fragmentContainer"
+        android:layout_above="@id/bottomNav"/>
+
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNav"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:padding="10dp"
-        app:menu="@menu/bottom_navbar_menu"/>
+        app:menu="@menu/bottom_navbar_menu"
+        android:background="@color/colorPrimaryLight"
+        app:itemTextColor="@color/colorPrimaryDark" />
 
 </RelativeLayout>

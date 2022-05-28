@@ -4,7 +4,7 @@
     <item
         android:id="@+id/activities"
         android:title="@string/activities"
-        android:icon="@drawable/ic_baseline_home_24"/>
+        android:icon="@drawable/ic_baseline_directions_run_24"/>
     <item
         android:id="@+id/profile"
         android:title="@string/profile"
