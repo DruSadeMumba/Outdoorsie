@@ -11,7 +11,7 @@
         android:layout_height="match_parent"
         android:contentDescription="@string/bg1"
         android:scaleType="centerCrop"
-        android:src="@drawable/river" />
+        android:src="@drawable/landing" />
 
     <TextView
         android:id="@+id/appNameText"
@@ -35,7 +35,7 @@
         android:layout_marginTop="250dp"
         android:fontFamily="@font/roboto"
         android:text="@string/adventure"
-        android:textColor="@color/colorSecondaryText"
+        android:textColor="@color/colorTextIcons"
         android:textSize="35sp"
         android:textStyle="bold"/>
 
