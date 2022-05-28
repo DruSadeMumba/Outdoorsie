@@ -62,6 +62,4 @@
         android:padding="10dp"
         android:text="@string/login" />
 
-
-
 </RelativeLayout>
