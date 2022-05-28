@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -37,10 +38,15 @@ import butterknife.ButterKnife;
           if(v == mSignInButton) {
               String username = mUsername.getText().toString();
               String password = mPassword.getText().toString();
-              Intent intent = new Intent(LoginActivity.this, ProfileActivity.class);
-              intent.putExtra("username", username);
-              intent.putExtra("password", password);
-              startActivity(intent);
+              if (username.isEmpty() || password.isEmpty() ){
+                  Toast.makeText(getApplicationContext(), "Please fill in all the fields", Toast.LENGTH_LONG).show();
+              }
+              else {
+                  Intent intent = new Intent(LoginActivity.this, ProfileActivity.class);
+                  intent.putExtra("username", username);
+                  intent.putExtra("password", password);
+                  startActivity(intent);
+              }
           }
       }
   }
