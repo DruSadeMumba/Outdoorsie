@@ -1,4 +1,4 @@
-package com.drusade.outdoorsie;
+package com.drusade.outdoorsie.adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
