@@ -31,6 +31,7 @@ public class MainActivityTest extends TestCase {
         TextView appNameText = activity.findViewById(R.id.appNameText);
         assertEquals("Outdoorsie", appNameText.getText().toString());
     }
+
     @Test
     public void validateTextViewSloganContent(){
         TextView appSloganText = activity.findViewById(R.id.appSloganText);

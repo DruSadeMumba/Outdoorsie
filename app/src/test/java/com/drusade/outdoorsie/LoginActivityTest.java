@@ -34,7 +34,7 @@ public class LoginActivityTest extends TestCase {
     }
 
     @Test
-    public void secondActivityStarted(){
+    public void nextActivityStarted(){
         activity.findViewById(R.id.signInButton).performClick();
         Intent expectedIntent = new Intent(activity, ActivitiesActivity.class);
         ShadowActivity shadowActivity = org.robolectric.Shadows.shadowOf(activity);
