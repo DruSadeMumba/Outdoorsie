@@ -11,4 +11,5 @@
     <string name="exit">Exit</string>
     <string name="profile">My Profile</string>
     <string name="my_activities">My Activities</string>
+    <string name="view_my_profile">View My Profile</string>
 </resources>
