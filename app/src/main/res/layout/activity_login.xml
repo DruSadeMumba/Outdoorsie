@@ -60,6 +60,6 @@
         android:layout_below="@id/password"
         android:layout_margin="100dp"
         android:padding="10dp"
-        android:text="@string/login" />
+        android:text="@string/sign_in" />
 
 </RelativeLayout>

@@ -32,7 +32,7 @@ public class ActivitiesArrayAdapter extends ArrayAdapter {
         String activity = mActivities[position];
         String location = mLocations[position];
         String weather = mWeathers[position];
-        return String.format("%s %s %s", activity, location, weather);
+        return String.format(" Activity: %s \n Location: %s \n Weather Condition: %s", activity, location, weather);
     }
 
     @Override

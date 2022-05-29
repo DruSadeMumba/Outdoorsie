@@ -23,8 +23,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @SuppressLint("NonConstantResourceId")
     @BindView(R.id.appSloganText) TextView mAppSloganText;
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

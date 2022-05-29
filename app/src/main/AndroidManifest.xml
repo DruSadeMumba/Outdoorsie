@@ -16,8 +16,11 @@
             android:name=".ActivitiesActivity"
             android:exported="false" />
         <activity
-            android:name=".ProfileActivity"
-            android:exported="false" />
+            android:name=".ProfileActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.drusade.outdoorsie.ActivitiesActivity" />
+        </activity>
         <activity android:name=".LoginActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
