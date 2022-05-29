@@ -2,21 +2,15 @@ package com.drusade.outdoorsie;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.FrameLayout;
-import android.widget.TextView;
 
-import com.drusade.outdoorsie.fragments.ActivitiesFragment;
+import com.drusade.outdoorsie.fragments.MyActivitiesFragment;
 import com.drusade.outdoorsie.fragments.ExitFragment;
 import com.drusade.outdoorsie.fragments.MyProfileFragment;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
 import butterknife.BindView;
@@ -30,7 +24,7 @@ public class ProfileActivity extends AppCompatActivity {
     @SuppressLint("NonConstantResourceId")
     @BindView(R.id.fragmentContainer) FrameLayout mFragmentContainer;
 
-    ActivitiesFragment mActivities = new ActivitiesFragment();
+    MyActivitiesFragment mMyActivities = new MyActivitiesFragment();
     MyProfileFragment mMyProfile = new MyProfileFragment();
     ExitFragment mExit = new ExitFragment();
 
@@ -40,7 +34,7 @@ public class ProfileActivity extends AppCompatActivity {
         setContentView(R.layout.activity_profile);
         ButterKnife.bind(this);
 
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, mActivities).commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, mMyActivities).commit();
 
         mBottomNav.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
 
@@ -48,8 +42,8 @@ public class ProfileActivity extends AppCompatActivity {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
-                    case R.id.activities:
-                        getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, mActivities).commit();
+                    case R.id.myActivities:
+                        getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, mMyActivities).commit();
                         return true;
                     case R.id.profile:
                         getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, mMyProfile).commit();
