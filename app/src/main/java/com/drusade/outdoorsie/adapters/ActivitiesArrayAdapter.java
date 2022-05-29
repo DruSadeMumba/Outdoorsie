@@ -14,19 +14,25 @@ public class ActivitiesArrayAdapter extends ArrayAdapter {
 
     private Context mContext;
     private String[] mActivities;
+    private String[] mLocations;
+    private String[] mWeathers;
 
 
-    public ActivitiesArrayAdapter(Context mContext, int resource, String[] mActivities) {
+    public ActivitiesArrayAdapter(Context mContext, int resource, String[] mActivities, String[] mLocations, String[] mWeathers) {
         super(mContext, resource);
         this.mContext = mContext;
         this.mActivities = mActivities;
+        this.mLocations = mLocations;
+        this.mWeathers = mWeathers;
 
     }
 
     @Override
     public Object getItem(int position) {
         String activity = mActivities[position];
-        return String.format("%s ", activity);
+        String location = mLocations[position];
+        String weather = mWeathers[position];
+        return String.format("%s %s %s", activity, location, weather);
     }
 
     @Override
