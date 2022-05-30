@@ -4,7 +4,7 @@ This is a social networking and engagement android application. Users can create
 
 ## Prerequisites 
 * Laptop with minimum 8GB RAM and 500 GB disk space
-* First and reliabe internet connection
+* Fast and reliabe internet connection
 
 ## Behaviour
 ###  Our application should:
