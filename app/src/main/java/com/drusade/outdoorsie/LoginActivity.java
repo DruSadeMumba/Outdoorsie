@@ -1,6 +1,8 @@
   package com.drusade.outdoorsie;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -9,6 +11,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import com.drusade.outdoorsie.fragments.MyProfileFragment;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -35,6 +39,8 @@ import butterknife.ButterKnife;
 
       @Override
       public void onClick(View v) {
+
+
           if(v == mSignInButton) {
               String username = mUsername.getText().toString();
               String password = mPassword.getText().toString();
@@ -50,3 +56,15 @@ import butterknife.ButterKnife;
           }
       }
   }
+
+
+
+
+
+
+  /*FragmentManager fragmentManager = getSupportFragmentManager();
+                  FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                  Bundle bundle = new Bundle();
+                  bundle.putString("username", username);
+                  MyProfileFragment myProfileFragment = new MyProfileFragment();
+                  myProfileFragment.setArguments(bundle);*/
