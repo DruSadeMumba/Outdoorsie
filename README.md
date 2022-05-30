@@ -9,8 +9,8 @@ This is a social networking and engagement android application. Users can create
 ## Behaviour
 ###  Our application should:
 * Allow a user to sign in.
-* Allow a user view activities posted by other users.
-* Allow a user view their profile.
+* Allow a user to view activities posted by other users.
+* Allow a user to view their profile.
 
 ## Setup/Installation Requirements
 #### Intall: 
