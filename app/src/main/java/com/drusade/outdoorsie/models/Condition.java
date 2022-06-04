@@ -4,6 +4,9 @@ package com.drusade.outdoorsie.models;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import org.parceler.Parcel;
+
+@Parcel
 public class Condition {
 
     @SerializedName("code")
