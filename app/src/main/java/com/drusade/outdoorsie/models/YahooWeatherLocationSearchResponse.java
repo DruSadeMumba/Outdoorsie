@@ -40,26 +40,24 @@ public class YahooWeatherLocationSearchResponse {
         this.forecasts = forecasts;
     }
 
+    //Getters
     public Location getLocation() {
         return location;
     }
-
-    public void setLocation(Location location) {
-        this.location = location;
-    }
-
     public CurrentObservation getCurrentObservation() {
         return currentObservation;
     }
-
-    public void setCurrentObservation(CurrentObservation currentObservation) {
-        this.currentObservation = currentObservation;
-    }
-
     public List<Forecast> getForecasts() {
         return forecasts;
     }
 
+    //Setters
+    public void setLocation(Location location) {
+        this.location = location;
+    }
+    public void setCurrentObservation(CurrentObservation currentObservation) {
+        this.currentObservation = currentObservation;
+    }
     public void setForecasts(List<Forecast> forecasts) {
         this.forecasts = forecasts;
     }

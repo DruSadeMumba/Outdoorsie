@@ -46,7 +46,7 @@ import butterknife.ButterKnife;
                   Toast.makeText(getApplicationContext(), "Please fill in all the fields", Toast.LENGTH_LONG).show();
               }
               else {
-                  Intent intent = new Intent(LoginActivity.this, ActivitiesActivity.class);
+                  Intent intent = new Intent(LoginActivity.this, AddActivity.class);
                   intent.putExtra("username", username);
                   intent.putExtra("password", password);
                   startActivity(intent);
