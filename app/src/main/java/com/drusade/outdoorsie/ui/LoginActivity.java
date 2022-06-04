@@ -1,8 +1,6 @@
-  package com.drusade.outdoorsie;
+  package com.drusade.outdoorsie.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -12,7 +10,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.drusade.outdoorsie.fragments.MyProfileFragment;
+import com.drusade.outdoorsie.R;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

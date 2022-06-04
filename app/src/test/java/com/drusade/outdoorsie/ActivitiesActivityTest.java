@@ -1,9 +1,10 @@
 package com.drusade.outdoorsie;
 
-import static org.junit.Assert.*;
-
 import android.content.Intent;
 import android.widget.TextView;
+
+import com.drusade.outdoorsie.ui.ActivitiesActivity;
+import com.drusade.outdoorsie.ui.ProfileActivity;
 
 import junit.framework.TestCase;
 

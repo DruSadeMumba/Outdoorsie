@@ -1,4 +1,4 @@
-package com.drusade.outdoorsie.fragments;
+package com.drusade.outdoorsie.ui.fragments;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;

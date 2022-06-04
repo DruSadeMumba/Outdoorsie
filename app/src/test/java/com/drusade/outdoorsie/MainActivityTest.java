@@ -3,6 +3,9 @@ package com.drusade.outdoorsie;
 import android.content.Intent;
 import android.widget.TextView;
 
+import com.drusade.outdoorsie.ui.LoginActivity;
+import com.drusade.outdoorsie.ui.MainActivity;
+
 import junit.framework.TestCase;
 
 import org.junit.Before;

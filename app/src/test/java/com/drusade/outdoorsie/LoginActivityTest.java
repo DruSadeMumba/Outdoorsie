@@ -3,7 +3,8 @@ package com.drusade.outdoorsie;
 import android.content.Intent;
 import android.widget.TextView;
 
-import androidx.annotation.ContentView;
+import com.drusade.outdoorsie.ui.ActivitiesActivity;
+import com.drusade.outdoorsie.ui.LoginActivity;
 
 import junit.framework.TestCase;
 

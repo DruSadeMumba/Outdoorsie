@@ -1,4 +1,4 @@
-package com.drusade.outdoorsie;
+package com.drusade.outdoorsie.ui;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -8,9 +8,10 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.FrameLayout;
 
-import com.drusade.outdoorsie.fragments.MyActivitiesFragment;
-import com.drusade.outdoorsie.fragments.ExitFragment;
-import com.drusade.outdoorsie.fragments.MyProfileFragment;
+import com.drusade.outdoorsie.R;
+import com.drusade.outdoorsie.ui.fragments.MyActivitiesFragment;
+import com.drusade.outdoorsie.ui.fragments.ExitFragment;
+import com.drusade.outdoorsie.ui.fragments.MyProfileFragment;
 import com.google.android.material.navigation.NavigationBarView;
 
 import butterknife.BindView;

@@ -1,4 +1,4 @@
-package com.drusade.outdoorsie;
+package com.drusade.outdoorsie.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.drusade.outdoorsie.R;
 import com.drusade.outdoorsie.adapters.ActivitiesArrayAdapter;
 
 import butterknife.BindView;

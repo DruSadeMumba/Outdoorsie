@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/forest"
-    tools:context=".fragments.MyActivitiesFragment">
+    tools:context=".ui.fragments.MyActivitiesFragment">
 
     <TextView
         android:id="@+id/myActivitiesTextView"
