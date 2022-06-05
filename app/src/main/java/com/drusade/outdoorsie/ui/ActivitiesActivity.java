@@ -1,6 +1,8 @@
 package com.drusade.outdoorsie.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -12,10 +14,13 @@ import android.widget.TextView;
 
 import com.drusade.outdoorsie.Constants;
 import com.drusade.outdoorsie.R;
-import com.drusade.outdoorsie.adapters.ActivitiesArrayAdapter;
+import com.drusade.outdoorsie.adapters.WeatherDisplayAdapter;
+import com.drusade.outdoorsie.models.Forecast;
 import com.drusade.outdoorsie.models.YahooWeatherLocationSearchResponse;
 import com.drusade.outdoorsie.network.YahooWeatherApi;
 import com.drusade.outdoorsie.network.YahooWeatherClient;
+
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -25,11 +30,14 @@ import retrofit2.Response;
 
 public class ActivitiesActivity extends AppCompatActivity implements View.OnClickListener {
 
+    private ActivitiesActivity mDisplayAdapter;
+    private List<Forecast> mList;
+
     @SuppressLint("NonConstantResourceId")
     @BindView(R.id.activitiesTextView) TextView mActivitiesTextView;
 
     @SuppressLint("NonConstantResourceId")
-    @BindView(R.id.activitiesListView) ListView mActivitiesListView;
+    @BindView(R.id.recyclerView) RecyclerView mRecyclerView;
 
     @SuppressLint("NonConstantResourceId")
     @BindView(R.id.viewProfileButton) Button mViewProfileButton;
@@ -48,6 +56,11 @@ public class ActivitiesActivity extends AppCompatActivity implements View.OnClic
             @Override
             public void onResponse(Call<YahooWeatherLocationSearchResponse> call, Response<YahooWeatherLocationSearchResponse> response) {
                 if (response.isSuccessful()) {
+                    mList = response.body().getForecasts();
+
+                    WeatherDisplayAdapter displayAdapter = new WeatherDisplayAdapter(ActivitiesActivity.this, mList);
+                    mRecyclerView.setAdapter(displayAdapter);
+                    mRecyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
 
                 }
             }
