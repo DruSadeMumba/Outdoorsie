@@ -10,11 +10,18 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.drusade.outdoorsie.Constants;
 import com.drusade.outdoorsie.R;
 import com.drusade.outdoorsie.adapters.ActivitiesArrayAdapter;
+import com.drusade.outdoorsie.models.YahooWeatherLocationSearchResponse;
+import com.drusade.outdoorsie.network.YahooWeatherApi;
+import com.drusade.outdoorsie.network.YahooWeatherClient;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class ActivitiesActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -27,33 +34,33 @@ public class ActivitiesActivity extends AppCompatActivity implements View.OnClic
     @SuppressLint("NonConstantResourceId")
     @BindView(R.id.viewProfileButton) Button mViewProfileButton;
 
-    private final String [] activities = new String [] {
-            "Camping Trip", "Picnic", "Hiking", "Boating"
-    };
-
-    private final String [] locations = new String[] {
-        "Maasai Mara", "Ololua", "Longonot", "Sagana"
-    };
-
-    private final String [] weathers = new String[] {
-        "Rainy", "Sunny", "Cloudy", "Thunder Storm"
-    };
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_activities);
         ButterKnife.bind(this);
-
-        ActivitiesArrayAdapter adapter = new ActivitiesArrayAdapter(this, android.R.layout.simple_list_item_1, activities, locations, weathers);
-        mActivitiesListView.setAdapter(adapter);
-
         mViewProfileButton.setOnClickListener(this);
+
+        YahooWeatherApi client = YahooWeatherClient.getClient();
+        Call<YahooWeatherLocationSearchResponse> call = client.getWeather(getIntent().getStringExtra("location"));
+
+        call.enqueue(new Callback<YahooWeatherLocationSearchResponse>() {
+            @Override
+            public void onResponse(Call<YahooWeatherLocationSearchResponse> call, Response<YahooWeatherLocationSearchResponse> response) {
+                if (response.isSuccessful()) {
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<YahooWeatherLocationSearchResponse> call, Throwable t) {
+
+            }
+        });
     }
 
     @Override
-    public void onClick(View v) {
+    public void onClick(View v){
         if (v == mViewProfileButton) {
             Intent intent = new Intent(ActivitiesActivity.this, ProfileActivity.class);
             startActivity(intent);
