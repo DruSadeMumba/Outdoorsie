@@ -32,6 +32,9 @@ public class AddActivity extends AppCompatActivity implements View.OnClickListen
     @SuppressLint("NonConstantResourceId")
     @BindView(R.id.addLocationButton) Button mAddLocationButton;
 
+    @SuppressLint("NonConstantResourceId")
+    @BindView(R.id.datePickerButton) Button mDatePickerButton;
+
     private DatePickerDialog datePickerDialog;
     private Button dateButton;
 
@@ -113,7 +116,6 @@ public class AddActivity extends AppCompatActivity implements View.OnClickListen
         if(month == 12)
             return "DEC";
 
-        //default should never happen
         return "JAN";
     }
 
@@ -127,11 +129,13 @@ public class AddActivity extends AppCompatActivity implements View.OnClickListen
         if(v == mAddLocationButton) {
             String location = mEditTextLocationName.getText().toString();
             String activityName = mEditTextLocationName.getText().toString();
-            if (location.isEmpty()){
-                Toast.makeText(getApplicationContext(), "Enter location", Toast.LENGTH_LONG).show();
+
+            if (location.isEmpty() || activityName.isEmpty()){
+                Toast.makeText(getApplicationContext(), "Fill in all fields", Toast.LENGTH_LONG).show();
             }
             else {
                 Intent intent = new Intent(AddActivity.this, ActivitiesActivity.class);
+                intent.putExtra("activityName", activityName);
                 intent.putExtra("location", location);
                 startActivity(intent);
             }

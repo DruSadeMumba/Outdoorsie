@@ -34,7 +34,7 @@ public class YahooWeatherClient {
                     .build();
 
             retrofit = new Retrofit.Builder()
-                    .baseUrl(YAHOO_WEATHER_BASE_URL)
+                    .baseUrl(YAHOO_WEATHER_HOST_URL)
                     .client(okHttpClient)
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();

@@ -9,12 +9,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ListView;
+import android.widget.EditText;
 import android.widget.TextView;
 
-import com.drusade.outdoorsie.Constants;
 import com.drusade.outdoorsie.R;
-import com.drusade.outdoorsie.adapters.WeatherDisplayAdapter;
+import com.drusade.outdoorsie.adapters.ActivitiesDisplayAdapter;
 import com.drusade.outdoorsie.models.Forecast;
 import com.drusade.outdoorsie.models.YahooWeatherLocationSearchResponse;
 import com.drusade.outdoorsie.network.YahooWeatherApi;
@@ -30,8 +29,8 @@ import retrofit2.Response;
 
 public class ActivitiesActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private ActivitiesActivity mDisplayAdapter;
-    private List<Forecast> mList;
+    private ActivitiesDisplayAdapter mDisplayAdapter;
+    private List<Forecast> forecasts;
 
     @SuppressLint("NonConstantResourceId")
     @BindView(R.id.activitiesTextView) TextView mActivitiesTextView;
@@ -42,24 +41,38 @@ public class ActivitiesActivity extends AppCompatActivity implements View.OnClic
     @SuppressLint("NonConstantResourceId")
     @BindView(R.id.viewProfileButton) Button mViewProfileButton;
 
+    @SuppressLint("NonConstantResourceId")
+    @BindView(R.id.activitiesNameTextView) TextView mActivitiesNameTextView;
+
+    @SuppressLint("NonConstantResourceId")
+    @BindView(R.id.activitiesLocationTextView) TextView mActivitiesLocationTextView;
+
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_activities);
+
         ButterKnife.bind(this);
+
         mViewProfileButton.setOnClickListener(this);
 
+        Intent intent = getIntent();
+        String location = intent.getStringExtra("location");
+        String activityName = intent.getStringExtra("activityName");
+
         YahooWeatherApi client = YahooWeatherClient.getClient();
-        Call<YahooWeatherLocationSearchResponse> call = client.getWeather(getIntent().getStringExtra("location"));
+        Call<YahooWeatherLocationSearchResponse> call = client.getWeather(location, "c");;
 
         call.enqueue(new Callback<YahooWeatherLocationSearchResponse>() {
             @Override
             public void onResponse(Call<YahooWeatherLocationSearchResponse> call, Response<YahooWeatherLocationSearchResponse> response) {
                 if (response.isSuccessful()) {
-                    mList = response.body().getForecasts();
+                    assert response.body() != null;
+                    forecasts = response.body().getForecasts();
 
-                    WeatherDisplayAdapter displayAdapter = new WeatherDisplayAdapter(ActivitiesActivity.this, mList);
-                    mRecyclerView.setAdapter(displayAdapter);
+                    mDisplayAdapter = new ActivitiesDisplayAdapter(ActivitiesActivity.this, forecasts);
+                    mRecyclerView.setAdapter(mDisplayAdapter);
                     mRecyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
 
                 }
@@ -70,6 +83,10 @@ public class ActivitiesActivity extends AppCompatActivity implements View.OnClic
 
             }
         });
+
+        mActivitiesLocationTextView.setText("Location: " + location);
+        mActivitiesNameTextView.setText("Activity: " + activityName);
+
     }
 
     @Override

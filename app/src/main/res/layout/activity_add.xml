@@ -16,7 +16,7 @@
         android:layout_marginEnd="102dp"
         android:layout_marginBottom="519dp"
         android:ems="10"
-        android:hint="Location"
+        android:hint="@string/location"
         android:inputType="textPersonName"
         tools:ignore="TouchTargetSizeCheck" />
 
@@ -29,7 +29,7 @@
         android:layout_marginEnd="101dp"
         android:layout_marginBottom="433dp"
         android:ems="10"
-        android:hint="Activity Name"
+        android:hint="@string/activity_name"
         android:inputType="textPersonName" />
 
     <Button
@@ -42,11 +42,12 @@
         android:layout_marginEnd="82dp"
         android:layout_marginBottom="356dp"
         android:ems="10"
-        android:hint="Date"
+        android:hint="@string/date"
         android:onClick="openDatePicker"
-        android:text="JAN 01 2022"
+        android:text="@string/default_date"
         android:textColor="@color/black"
-        android:textSize="15sp" />
+        android:textSize="15sp"
+        tools:ignore="UsingOnClickInXml" />
 
     <Button
         android:id="@+id/addLocationButton"
@@ -58,6 +59,6 @@
         android:layout_marginStart="161dp"
         android:layout_marginEnd="162dp"
         android:layout_marginBottom="259dp"
-        android:text="Add" />
+        android:text="@string/add" />
 
 </RelativeLayout>

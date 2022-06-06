@@ -18,20 +18,20 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class WeatherDisplayAdapter extends RecyclerView.Adapter<WeatherDisplayAdapter.DisplayViewHolder>{
+public class ActivitiesDisplayAdapter extends RecyclerView.Adapter<ActivitiesDisplayAdapter.DisplayViewHolder>{
 
     private Context mContext;
     private List<Forecast> weatherList;
 
 
-    public WeatherDisplayAdapter(Context mContext, List<Forecast> weatherList) {
+    public ActivitiesDisplayAdapter(Context mContext, List<Forecast> weatherList) {
         this.mContext = mContext;
         this.weatherList = weatherList;
     }
 
     @NonNull
     @Override
-    public WeatherDisplayAdapter.DisplayViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ActivitiesDisplayAdapter.DisplayViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.displayrecyclerview, parent, false);
         DisplayViewHolder displayViewHolder = new DisplayViewHolder(view);
 
@@ -39,7 +39,7 @@ public class WeatherDisplayAdapter extends RecyclerView.Adapter<WeatherDisplayAd
     }
 
     @Override
-    public void onBindViewHolder(@NonNull WeatherDisplayAdapter.DisplayViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ActivitiesDisplayAdapter.DisplayViewHolder holder, int position) {
         holder.bindWeather(weatherList.get(position));
 
     }
