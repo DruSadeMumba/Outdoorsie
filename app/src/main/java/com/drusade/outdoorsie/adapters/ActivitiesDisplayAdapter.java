@@ -51,11 +51,11 @@ public class ActivitiesDisplayAdapter extends RecyclerView.Adapter<ActivitiesDis
 
     public class DisplayViewHolder extends RecyclerView.ViewHolder {
         @SuppressLint("NonConstantResourceId")
-        @BindView(R.id.temperature)
-        TextView mTemeperature;
+        @BindView(R.id.temperature) TextView mTemeperature;
+
         @SuppressLint("NonConstantResourceId")
-        @BindView(R.id.day)
-        TextView mDay;
+        @BindView(R.id.day) TextView mDay;
+
         @SuppressLint("NonConstantResourceId")
         @BindView(R.id.text) TextView mText;
 
@@ -65,10 +65,10 @@ public class ActivitiesDisplayAdapter extends RecyclerView.Adapter<ActivitiesDis
             ButterKnife.bind(this, itemView);
             mContext = itemView.getContext();
         }
-        public void bindWeather(Forecast forecast){
-            mTemeperature.setText(forecast.getHigh());
-            mDay.setText(forecast.getDay());
-            mText.setText(forecast.getText());
+        public void bindWeather(Forecast weather){
+            mTemeperature.setText(weather.getHigh());
+            mDay.setText(weather.getDay());
+            mText.setText(weather.getText());
         }
     }
 

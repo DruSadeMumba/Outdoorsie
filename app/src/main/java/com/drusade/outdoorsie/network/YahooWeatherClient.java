@@ -25,7 +25,6 @@ public class YahooWeatherClient {
                             Request newRequest  = chain
                                     .request()
                                     .newBuilder()
-                                    .addHeader("X-RapidAPI-Host", YAHOO_WEATHER_HOST_URL)
                                     .addHeader("X-RapidAPI-Key", YAHOO_WEATHER_API_KEY)
                                     .build();
                             return chain.proceed(newRequest);

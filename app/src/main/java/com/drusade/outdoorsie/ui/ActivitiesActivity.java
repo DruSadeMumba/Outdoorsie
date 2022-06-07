@@ -73,8 +73,11 @@ public class ActivitiesActivity extends AppCompatActivity implements View.OnClic
 
                     mDisplayAdapter = new ActivitiesDisplayAdapter(ActivitiesActivity.this, forecasts);
                     mRecyclerView.setAdapter(mDisplayAdapter);
-                    mRecyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+                    RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(ActivitiesActivity.this);
+                    mRecyclerView.setLayoutManager(layoutManager);
+                    mRecyclerView.setHasFixedSize(true);
 
+                    showWeather();
                 }
             }
 
@@ -96,4 +99,5 @@ public class ActivitiesActivity extends AppCompatActivity implements View.OnClic
             startActivity(intent);
         }
     }
+    private void showWeather() {mRecyclerView.setVisibility(View.VISIBLE);}
 }
