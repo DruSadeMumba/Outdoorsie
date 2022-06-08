@@ -9,11 +9,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 
 import com.drusade.outdoorsie.R;
-import com.drusade.outdoorsie.adapters.ActivitiesDisplayAdapter;
+import com.drusade.outdoorsie.adapters.ForcastDisplayAdapter;
 import com.drusade.outdoorsie.models.Forecast;
 import com.drusade.outdoorsie.models.YahooWeatherLocationSearchResponse;
 import com.drusade.outdoorsie.network.YahooWeatherApi;
@@ -29,11 +28,11 @@ import retrofit2.Response;
 
 public class ActivitiesActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private ActivitiesDisplayAdapter mDisplayAdapter;
+    private ForcastDisplayAdapter mDisplayAdapter;
     private List<Forecast> forecasts;
 
-    @SuppressLint("NonConstantResourceId")
-    @BindView(R.id.activitiesTextView) TextView mActivitiesTextView;
+    /*@SuppressLint("NonConstantResourceId")
+    @BindView(R.id.activitiesTextView) TextView mActivitiesTextView;*/
 
     @SuppressLint("NonConstantResourceId")
     @BindView(R.id.recyclerView) RecyclerView mRecyclerView;
@@ -71,7 +70,7 @@ public class ActivitiesActivity extends AppCompatActivity implements View.OnClic
                     assert response.body() != null;
                     forecasts = response.body().getForecasts();
 
-                    mDisplayAdapter = new ActivitiesDisplayAdapter(ActivitiesActivity.this, forecasts);
+                    mDisplayAdapter = new ForcastDisplayAdapter(ActivitiesActivity.this, forecasts);
                     mRecyclerView.setAdapter(mDisplayAdapter);
                     RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(ActivitiesActivity.this);
                     mRecyclerView.setLayoutManager(layoutManager);

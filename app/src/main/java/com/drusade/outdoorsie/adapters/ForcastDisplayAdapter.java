@@ -18,28 +18,28 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class ActivitiesDisplayAdapter extends RecyclerView.Adapter<ActivitiesDisplayAdapter.DisplayViewHolder>{
+public class ForcastDisplayAdapter extends RecyclerView.Adapter<ForcastDisplayAdapter.DisplayViewHolder>{
 
     private Context mContext;
     private List<Forecast> weatherList;
 
 
-    public ActivitiesDisplayAdapter(Context mContext, List<Forecast> weatherList) {
+    public ForcastDisplayAdapter(Context mContext, List<Forecast> weatherList) {
         this.mContext = mContext;
         this.weatherList = weatherList;
     }
 
     @NonNull
     @Override
-    public ActivitiesDisplayAdapter.DisplayViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.displayrecyclerview, parent, false);
+    public ForcastDisplayAdapter.DisplayViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.forcastrecyclerview, parent, false);
         DisplayViewHolder displayViewHolder = new DisplayViewHolder(view);
 
         return displayViewHolder;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ActivitiesDisplayAdapter.DisplayViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ForcastDisplayAdapter.DisplayViewHolder holder, int position) {
         holder.bindWeather(weatherList.get(position));
 
     }
@@ -65,10 +65,11 @@ public class ActivitiesDisplayAdapter extends RecyclerView.Adapter<ActivitiesDis
             ButterKnife.bind(this, itemView);
             mContext = itemView.getContext();
         }
+        @SuppressLint("SetTextI18n")
         public void bindWeather(Forecast weather){
-            mTemeperature.setText(Integer.toString(weather.getHigh()));
-            mDay.setText(weather.getDay());
-            mText.setText(weather.getText());
+            mTemeperature.setText("Temperature: " + weather.getHigh());
+            mDay.setText("Day: " + weather.getDay());
+            mText.setText("Weather condition: " + weather.getText());
         }
     }
 

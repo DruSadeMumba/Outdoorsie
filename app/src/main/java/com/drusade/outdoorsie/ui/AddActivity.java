@@ -128,7 +128,7 @@ public class AddActivity extends AppCompatActivity implements View.OnClickListen
     public void onClick(View v) {
         if(v == mAddLocationButton) {
             String location = mEditTextLocationName.getText().toString();
-            String activityName = mEditTextLocationName.getText().toString();
+            String activityName = mEditTextActivityName.getText().toString();
 
             if (location.isEmpty() || activityName.isEmpty()){
                 Toast.makeText(getApplicationContext(), "Fill in all fields", Toast.LENGTH_LONG).show();
