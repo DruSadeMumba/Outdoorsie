@@ -16,39 +16,41 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="198dp">
 
             <TextView
-                android:id="@+id/temperature"
+                android:id="@+id/day"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="52dp"
-                android:layout_marginEnd="268dp"
-                android:text="Temperature"
+                android:layout_marginTop="28dp"
+                android:layout_marginEnd="340dp"
+                android:text="Day"
                 android:textSize="20sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/day"
+                android:id="@+id/temperature"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Day"
-                android:textSize="10sp"
-                tools:layout_editor_absoluteX="189dp"
-                tools:layout_editor_absoluteY="52dp"
-                tools:ignore="MissingConstraints" />
+                android:layout_marginTop="28dp"
+                android:text="Temperature"
+                android:textSize="20sp"
+                app:layout_constraintTop_toBottomOf="@+id/day"
+                tools:ignore="MissingConstraints"
+                tools:layout_editor_absoluteX="16dp" />
 
             <TextView
                 android:id="@+id/text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
                 android:text="Text"
-                tools:layout_editor_absoluteX="300dp"
-                tools:layout_editor_absoluteY="52dp"
-                tools:ignore="MissingConstraints" />
+                android:textSize="20sp"
+                app:layout_constraintTop_toBottomOf="@+id/temperature"
+                tools:ignore="MissingConstraints"
+                tools:layout_editor_absoluteX="17dp" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>

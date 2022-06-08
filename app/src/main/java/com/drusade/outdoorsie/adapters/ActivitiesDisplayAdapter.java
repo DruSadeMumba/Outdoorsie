@@ -66,7 +66,7 @@ public class ActivitiesDisplayAdapter extends RecyclerView.Adapter<ActivitiesDis
             mContext = itemView.getContext();
         }
         public void bindWeather(Forecast weather){
-            mTemeperature.setText(weather.getHigh());
+            mTemeperature.setText(Integer.toString(weather.getHigh()));
             mDay.setText(weather.getDay());
             mText.setText(weather.getText());
         }
