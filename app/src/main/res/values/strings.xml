@@ -17,4 +17,6 @@
     <string name="add">Add</string>
     <string name="activity_name">Activity Name</string>
     <string name="location">Location</string>
+    <string name="select_city">Select City</string>
+    <string name="select_activity">Select Activity</string>
 </resources>
