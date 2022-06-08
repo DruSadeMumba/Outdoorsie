@@ -1,13 +1,17 @@
 package com.drusade.outdoorsie.ui;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -23,11 +27,14 @@ import butterknife.ButterKnife;
 
 public class AddActivity extends AppCompatActivity implements View.OnClickListener{
 
-    @SuppressLint("NonConstantResourceId")
-    @BindView(R.id.editTextLocationName) EditText mEditTextLocationName;
+    String [] activityList = {"Camping", "Biking", "Hiking", "Picnic", "Swimming", "Boating", "Music Festival"};
+    ArrayAdapter<String> adapterActivity;
 
     @SuppressLint("NonConstantResourceId")
-    @BindView(R.id.editTextActivityName) EditText mEditTextActivityName;
+    @BindView(R.id.autoCompleteTextActivityName) AutoCompleteTextView mAutoCompleteTextActivityName;
+
+    @SuppressLint("NonConstantResourceId")
+    @BindView(R.id.editTextLocationName) EditText mEditTextLocationName;
 
     @SuppressLint("NonConstantResourceId")
     @BindView(R.id.addLocationButton) Button mAddLocationButton;
@@ -38,16 +45,40 @@ public class AddActivity extends AppCompatActivity implements View.OnClickListen
     private DatePickerDialog datePickerDialog;
     private Button dateButton;
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add);
         ButterKnife.bind(this);
 
-        mAddLocationButton.setOnClickListener(this);
+        adapterActivity = new ArrayAdapter<String>(this, R.layout.activities_selection_list_item, activityList);
+        mAutoCompleteTextActivityName.setAdapter(adapterActivity);
+
         initDatePicker();
         dateButton = findViewById(R.id.datePickerButton);
         dateButton.setText(getTodaysDate());
+
+        mAddLocationButton.setOnClickListener(this);
+
+    }
+
+    @Override
+    public void onClick(View v) {
+        if(v == mAddLocationButton) {
+            String location = mEditTextLocationName.getText().toString();
+            String activityName = mAutoCompleteTextActivityName.getText().toString();
+
+            if (location.isEmpty() || activityName.isEmpty()){
+                Toast.makeText(getApplicationContext(), "Fill in all fields", Toast.LENGTH_LONG).show();
+            }
+            else {
+                Intent intent = new Intent(AddActivity.this, ActivitiesActivity.class);
+                intent.putExtra("activityName", activityName);
+                intent.putExtra("location", location);
+                startActivity(intent);
+            }
+        }
     }
 
     private String getTodaysDate()
@@ -124,21 +155,4 @@ public class AddActivity extends AppCompatActivity implements View.OnClickListen
         datePickerDialog.show();
     }
 
-    @Override
-    public void onClick(View v) {
-        if(v == mAddLocationButton) {
-            String location = mEditTextLocationName.getText().toString();
-            String activityName = mEditTextActivityName.getText().toString();
-
-            if (location.isEmpty() || activityName.isEmpty()){
-                Toast.makeText(getApplicationContext(), "Fill in all fields", Toast.LENGTH_LONG).show();
-            }
-            else {
-                Intent intent = new Intent(AddActivity.this, ActivitiesActivity.class);
-                intent.putExtra("activityName", activityName);
-                intent.putExtra("location", location);
-                startActivity(intent);
-            }
-        }
-    }
 }
