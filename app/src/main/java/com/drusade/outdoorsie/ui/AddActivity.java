@@ -9,6 +9,7 @@ import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
@@ -17,7 +18,13 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.drusade.outdoorsie.Constants;
 import com.drusade.outdoorsie.R;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -44,10 +51,32 @@ public class AddActivity extends AppCompatActivity implements View.OnClickListen
 
     private DatePickerDialog datePickerDialog;
     private Button dateButton;
+    private DatabaseReference mTypedLocationReference;
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        mTypedLocationReference = FirebaseDatabase
+                .getInstance()
+                .getReference()
+                .child(Constants.FIREBASE_CHILD_TYPED_LOCATION);
+
+        mTypedLocationReference.addValueEventListener(new ValueEventListener() {
+
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot locationSnapshot : dataSnapshot.getChildren()) {
+                    String location = locationSnapshot.getValue().toString();
+                    Log.d("Locations updated", "location: " + location);
+                }
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+            }
+        });
+
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add);
         ButterKnife.bind(this);
@@ -60,25 +89,25 @@ public class AddActivity extends AppCompatActivity implements View.OnClickListen
         dateButton.setText(getTodaysDate());
 
         mAddLocationButton.setOnClickListener(this);
-
     }
 
     @Override
     public void onClick(View v) {
-        if(v == mAddLocationButton) {
+        if (v == mAddLocationButton) {
             String location = mEditTextLocationName.getText().toString();
             String activityName = mAutoCompleteTextActivityName.getText().toString();
 
-            if (location.isEmpty() || activityName.isEmpty()){
-                Toast.makeText(getApplicationContext(), "Fill in all fields", Toast.LENGTH_LONG).show();
-            }
-            else {
-                Intent intent = new Intent(AddActivity.this, ActivitiesActivity.class);
-                intent.putExtra("activityName", activityName);
-                intent.putExtra("location", location);
-                startActivity(intent);
-            }
+            saveLocationToFirebase(location);
+
+            Intent intent = new Intent(AddActivity.this, ActivitiesActivity.class);
+            intent.putExtra("activityName", activityName);
+            intent.putExtra("location", location);
+            startActivity(intent);
         }
+    }
+
+    public void saveLocationToFirebase(String location){
+        mTypedLocationReference.push().setValue(location);
     }
 
     private String getTodaysDate()
@@ -112,7 +141,6 @@ public class AddActivity extends AppCompatActivity implements View.OnClickListen
         int style = AlertDialog.THEME_HOLO_LIGHT;
 
         datePickerDialog = new DatePickerDialog(this, style, dateSetListener, year, month, day);
-
     }
 
     private String makeDateString(int day, int month, int year)
@@ -154,5 +182,5 @@ public class AddActivity extends AppCompatActivity implements View.OnClickListen
     {
         datePickerDialog.show();
     }
-
 }
+
