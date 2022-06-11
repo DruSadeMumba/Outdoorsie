@@ -42,12 +42,3 @@ public class YahooWeatherClient {
         return retrofit.create(YahooWeatherApi.class);
     }
 }
-
-/* Request request = new Request.Builder()
-                    .url("https://yahoo-weather5.p.rapidapi.com/weather?location=sunnyvale&format=json&u=c")
-                    .get()
-                    .addHeader("X-RapidAPI-Host", YAHOO_WEATHER_BASE_URL)
-                    .addHeader("X-RapidAPI-Key", YAHOO_WEATHER_API_KEY)
-                    .build();
-
-            Response response = client.newCall(request).execute();*/

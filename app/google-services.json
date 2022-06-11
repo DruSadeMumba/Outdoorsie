@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "606808094234",
+    "project_id": "outdoorsie-b8876",
+    "storage_bucket": "outdoorsie-b8876.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:606808094234:android:9fadf6ce7e5f2740f583a3",
+        "android_client_info": {
+          "package_name": "com.drusade.outdoorsie"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "606808094234-jr5l23ffrn7v6u9j5oqh1joc6na7qlb4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.drusade.outdoorsie",
+            "certificate_hash": "8e83805bb72650decf134df5c50b1d4b099b7bc4"
+          }
+        },
+        {
+          "client_id": "606808094234-u0sjbiaj1c1ul9m1plvbuliv7m99ijuh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDqJQIi-AyyWd-eYTWzx_v_CGBji4JMahQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "606808094234-u0sjbiaj1c1ul9m1plvbuliv7m99ijuh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
