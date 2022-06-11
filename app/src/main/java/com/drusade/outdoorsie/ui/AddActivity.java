@@ -53,6 +53,8 @@ public class AddActivity extends AppCompatActivity implements View.OnClickListen
     private Button dateButton;
     private DatabaseReference mTypedLocationReference;
     private ValueEventListener mTypedLocationReferenceListener;
+    private DatabaseReference mSelectedActivityReference;
+    private ValueEventListener mSelectedActivityReferenceListener;
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
@@ -64,12 +66,29 @@ public class AddActivity extends AppCompatActivity implements View.OnClickListen
                 .child(Constants.FIREBASE_CHILD_TYPED_LOCATION);
 
         mTypedLocationReference.addValueEventListener(new ValueEventListener() {
-
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot locationSnapshot : dataSnapshot.getChildren()) {
                     String location = locationSnapshot.getValue().toString();
                     Log.d("Locations updated", "location: " + location);
+                }
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+            }
+        });
+
+        mSelectedActivityReference = FirebaseDatabase
+                .getInstance()
+                .getReference()
+                .child(Constants.FIREBASE_CHILD_SELECTED_ACTIVITY);
+
+        mSelectedActivityReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot activitySnapshot : dataSnapshot.getChildren()) {
+                    String activity = activitySnapshot.getValue().toString();
+                    Log.d("Activity added", "activity: " + activity);
                 }
             }
             @Override
@@ -99,6 +118,7 @@ public class AddActivity extends AppCompatActivity implements View.OnClickListen
             String activityName = mAutoCompleteTextActivityName.getText().toString();
 
             saveLocationToFirebase(location);
+            saveActivityToFirebase(activityName);
 
             Intent intent = new Intent(AddActivity.this, ActivitiesActivity.class);
             intent.putExtra("activityName", activityName);
@@ -110,13 +130,22 @@ public class AddActivity extends AppCompatActivity implements View.OnClickListen
     public void saveLocationToFirebase(String location){
         mTypedLocationReference.push().setValue(location);
     }
+    public void saveActivityToFirebase(String activityName){
+        mSelectedActivityReference.push().setValue(activityName);
+    }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
         mTypedLocationReference.removeEventListener(mTypedLocationReferenceListener);
+        mSelectedActivityReference.removeEventListener(mSelectedActivityReferenceListener);
     }
 
+
+
+
+
+    //Date picker
     private String getTodaysDate()
     {
         Calendar cal = Calendar.getInstance();

@@ -8,4 +8,5 @@ public class Constants {
     public static final String TEMPSCALE_QUERY_PARAMETER = "u";
     public static final String API_KEY_QUERY_PARAMETER = "appid";
     public static final String FIREBASE_CHILD_TYPED_LOCATION = "enteredLocation";
+    public static final String FIREBASE_CHILD_SELECTED_ACTIVITY = "selectedActivity";
 }
