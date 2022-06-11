@@ -52,6 +52,7 @@ public class AddActivity extends AppCompatActivity implements View.OnClickListen
     private DatePickerDialog datePickerDialog;
     private Button dateButton;
     private DatabaseReference mTypedLocationReference;
+    private ValueEventListener mTypedLocationReferenceListener;
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
@@ -108,6 +109,12 @@ public class AddActivity extends AppCompatActivity implements View.OnClickListen
 
     public void saveLocationToFirebase(String location){
         mTypedLocationReference.push().setValue(location);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mTypedLocationReference.removeEventListener(mTypedLocationReferenceListener);
     }
 
     private String getTodaysDate()
