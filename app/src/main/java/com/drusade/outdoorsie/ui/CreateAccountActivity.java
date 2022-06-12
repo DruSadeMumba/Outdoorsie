@@ -52,8 +52,7 @@ public class CreateAccountActivity extends AppCompatActivity implements View.OnC
     @BindView(R.id.confirmPasswordEditText) EditText mConfirmPasswordEditText;
 
     @SuppressLint("NonConstantResourceId")
-    @BindView(R.id.loginTextView)
-    TextView mLoginTextView;
+    @BindView(R.id.loginTextView) TextView mLoginTextView;
 
     @SuppressLint("NonConstantResourceId")
     @BindView(R.id.firebaseProgressBar)
@@ -70,6 +69,7 @@ public class CreateAccountActivity extends AppCompatActivity implements View.OnC
 
         mAuth = FirebaseAuth.getInstance();
 
+        mLoginTextView.setOnClickListener(this);
         mCreateUserButton.setOnClickListener(this);
 
         createAuthStateListener();
@@ -185,6 +185,12 @@ public class CreateAccountActivity extends AppCompatActivity implements View.OnC
 
     @Override
     public void onClick(View view) {
+        if (view == mLoginTextView) {
+            Intent intent = new Intent(CreateAccountActivity.this, LoginActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
+            finish();
+        }
         if (view == mCreateUserButton) {
             createNewUser();
         }
