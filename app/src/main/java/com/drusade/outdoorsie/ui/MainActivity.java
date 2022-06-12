@@ -20,7 +20,7 @@ import butterknife.ButterKnife;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     @SuppressLint("NonConstantResourceId")
-    @BindView(R.id.loginButton) Button mLoginButton;
+    @BindView(R.id.viewActivitiesButton) Button mViewActivitiesButton;
 
     @SuppressLint("NonConstantResourceId")
     @BindView(R.id.appNameText) TextView mAppNameText;
@@ -35,13 +35,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
-        mLoginButton.setOnClickListener(this);
+        mViewActivitiesButton.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
-        if(v == mLoginButton) {
-            Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+        if(v == mViewActivitiesButton) {
+            Intent intent = new Intent(MainActivity.this, AddActivity.class);
             startActivity(intent);
         }
     }

@@ -47,8 +47,7 @@ import butterknife.ButterKnife;
       @BindView(R.id.loadingTextView) TextView mLoadingSignUp;
 
       @SuppressLint("NonConstantResourceId")
-      @BindView(R.id.firebaseProgressBar)
-      ProgressBar mSignInProgressBar;
+      @BindView(R.id.firebaseProgressBar) ProgressBar mSignInProgressBar;
 
       @Override
       protected void onCreate(Bundle savedInstanceState) {
