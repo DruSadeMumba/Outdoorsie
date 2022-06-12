@@ -18,13 +18,13 @@ import butterknife.ButterKnife;
   public class LoginActivity extends AppCompatActivity implements View.OnClickListener{
 
     @SuppressLint("NonConstantResourceId")
-    @BindView(R.id.password) EditText mPassword;
+    @BindView(R.id.emailEditText) EditText mEmailEditText;
 
     @SuppressLint("NonConstantResourceId")
-    @BindView(R.id.username) EditText mUsername;
+    @BindView(R.id.passwordEditText) EditText mPasswordEditText;
 
     @SuppressLint("NonConstantResourceId")
-    @BindView(R.id.signInButton) Button mSignInButton;
+    @BindView(R.id.passwordLoginButton) Button mPasswordLoginButton;
 
 
     @Override
@@ -32,22 +32,22 @@ import butterknife.ButterKnife;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
-        mSignInButton.setOnClickListener(this);
+        mPasswordLoginButton.setOnClickListener(this);
     }
 
       @Override
       public void onClick(View v) {
 
 
-          if(v == mSignInButton) {
-              String username = mUsername.getText().toString();
-              String password = mPassword.getText().toString();
-              if (username.isEmpty() || password.isEmpty() ){
+          if(v == mPasswordLoginButton) {
+              String email = mEmailEditText.getText().toString();
+              String password = mPasswordEditText.getText().toString();
+              if (email.isEmpty() || password.isEmpty() ){
                   Toast.makeText(getApplicationContext(), "Please fill in all the fields", Toast.LENGTH_LONG).show();
               }
               else {
                   Intent intent = new Intent(LoginActivity.this, AddActivity.class);
-                  intent.putExtra("username", username);
+                  intent.putExtra("email", email);
                   intent.putExtra("password", password);
                   startActivity(intent);
               }

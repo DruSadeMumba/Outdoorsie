@@ -108,7 +108,7 @@
             android:textColor="@color/colorPrimaryLight"
             android:textStyle="bold"
             android:textSize="18sp"
-            android:text="Log in here"
+            android:text="Or Log in here..."
             android:id="@+id/loginTextView"
             android:layout_gravity="center_horizontal" />
 
