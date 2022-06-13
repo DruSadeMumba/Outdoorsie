@@ -32,6 +32,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @SuppressLint("NonConstantResourceId")
     @BindView(R.id.appSloganText) TextView mAppSloganText;
 
+    @SuppressLint("NonConstantResourceId")
+    @BindView(R.id.addActivitiesButton) Button mAddActivitiesButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,11 +42,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         ButterKnife.bind(this);
 
         mViewActivitiesButton.setOnClickListener(this);
+        mAddActivitiesButton.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
-        if(v == mViewActivitiesButton) {
+        if(v == mAddActivitiesButton) {
             Intent intent = new Intent(MainActivity.this, AddActivity.class);
             startActivity(intent);
         }
