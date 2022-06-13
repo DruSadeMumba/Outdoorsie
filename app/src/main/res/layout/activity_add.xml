@@ -61,7 +61,7 @@
         tools:ignore="UsingOnClickInXml" />
 
     <Button
-        android:id="@+id/addLocationButton"
+        android:id="@+id/addActivityButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"

@@ -26,7 +26,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class ActivitiesActivity extends AppCompatActivity implements View.OnClickListener {
+public class ActivitiesDetailActivity extends AppCompatActivity implements View.OnClickListener {
 
     private ForcastDisplayAdapter mDisplayAdapter;
     private List<Forecast> forecasts;
@@ -70,9 +70,9 @@ public class ActivitiesActivity extends AppCompatActivity implements View.OnClic
                     assert response.body() != null;
                     forecasts = response.body().getForecasts();
 
-                    mDisplayAdapter = new ForcastDisplayAdapter(ActivitiesActivity.this, forecasts);
+                    mDisplayAdapter = new ForcastDisplayAdapter(ActivitiesDetailActivity.this, forecasts);
                     mRecyclerView.setAdapter(mDisplayAdapter);
-                    RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(ActivitiesActivity.this);
+                    RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(ActivitiesDetailActivity.this);
                     mRecyclerView.setLayoutManager(layoutManager);
                     mRecyclerView.setHasFixedSize(true);
 
@@ -94,7 +94,7 @@ public class ActivitiesActivity extends AppCompatActivity implements View.OnClic
     @Override
     public void onClick(View v){
         if (v == mViewProfileButton) {
-            Intent intent = new Intent(ActivitiesActivity.this, ProfileActivity.class);
+            Intent intent = new Intent(ActivitiesDetailActivity.this, ProfileActivity.class);
             startActivity(intent);
         }
     }

@@ -28,12 +28,12 @@
             android:name=".ui.AddActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.ActivitiesActivity"
+            android:name=".ui.ActivitiesDetailActivity"
             android:exported="false" />
         <activity android:name=".ui.ProfileActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.drusade.outdoorsie.ui.ActivitiesActivity" />
+                android:value="com.drusade.outdoorsie.ui.ActivitiesDetailActivity" />
         </activity>
         <activity android:name=".ui.LoginActivity">
             <meta-data

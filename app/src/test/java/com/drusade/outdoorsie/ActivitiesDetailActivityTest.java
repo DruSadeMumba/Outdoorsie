@@ -3,7 +3,7 @@ package com.drusade.outdoorsie;
 import android.content.Intent;
 import android.widget.TextView;
 
-import com.drusade.outdoorsie.ui.ActivitiesActivity;
+import com.drusade.outdoorsie.ui.ActivitiesDetailActivity;
 import com.drusade.outdoorsie.ui.ProfileActivity;
 
 import junit.framework.TestCase;
@@ -17,13 +17,13 @@ import org.robolectric.shadows.ShadowActivity;
 
 @RunWith(RobolectricTestRunner.class)
 
-public class ActivitiesActivityTest  extends TestCase {
+public class ActivitiesDetailActivityTest extends TestCase {
 
-    private ActivitiesActivity activity;
+    private ActivitiesDetailActivity activity;
 
     @Before
     public void setUp() throws Exception {
-        activity = Robolectric.buildActivity(ActivitiesActivity.class)
+        activity = Robolectric.buildActivity(ActivitiesDetailActivity.class)
                 .create()
                 .resume()
                 .get();

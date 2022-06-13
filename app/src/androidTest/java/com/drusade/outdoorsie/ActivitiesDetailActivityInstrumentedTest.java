@@ -8,7 +8,7 @@ import androidx.test.ext.junit.rules.ActivityScenarioRule;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.filters.LargeTest;
 
-import com.drusade.outdoorsie.ui.ActivitiesActivity;
+import com.drusade.outdoorsie.ui.ActivitiesDetailActivity;
 
 import org.junit.Rule;
 import org.junit.Test;
@@ -17,10 +17,10 @@ import org.junit.runner.RunWith;
 @RunWith(AndroidJUnit4.class)
 @LargeTest
 
-public class ActivitiesActivityInstrumentedTest {
+public class ActivitiesDetailActivityInstrumentedTest {
     @Rule
-    public ActivityScenarioRule<ActivitiesActivity> activityRule =
-            new ActivityScenarioRule<>(ActivitiesActivity.class);
+    public ActivityScenarioRule<ActivitiesDetailActivity> activityRule =
+            new ActivityScenarioRule<>(ActivitiesDetailActivity.class);
 
     @Test
     public void viewProfileButtonSendsToProfileActivity(){

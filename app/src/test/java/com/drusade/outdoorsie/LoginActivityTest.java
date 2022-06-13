@@ -3,7 +3,7 @@ package com.drusade.outdoorsie;
 import android.content.Intent;
 import android.widget.TextView;
 
-import com.drusade.outdoorsie.ui.ActivitiesActivity;
+import com.drusade.outdoorsie.ui.ActivitiesDetailActivity;
 import com.drusade.outdoorsie.ui.LoginActivity;
 
 import junit.framework.TestCase;
@@ -37,7 +37,7 @@ public class LoginActivityTest extends TestCase {
     @Test
     public void nextActivityStarted(){
         activity.findViewById(R.id.signInButton).performClick();
-        Intent expectedIntent = new Intent(activity, ActivitiesActivity.class);
+        Intent expectedIntent = new Intent(activity, ActivitiesDetailActivity.class);
         ShadowActivity shadowActivity = org.robolectric.Shadows.shadowOf(activity);
         Intent actualIntent = shadowActivity.getNextStartedActivity();
         assertTrue(actualIntent.filterEquals(expectedIntent));

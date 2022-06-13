@@ -16,7 +16,6 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.drusade.outdoorsie.Constants;
 import com.drusade.outdoorsie.R;
@@ -27,7 +26,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.Calendar;
-import java.util.Date;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -44,7 +42,7 @@ public class AddActivity extends AppCompatActivity implements View.OnClickListen
     @BindView(R.id.editTextLocationName) EditText mEditTextLocationName;
 
     @SuppressLint("NonConstantResourceId")
-    @BindView(R.id.addLocationButton) Button mAddLocationButton;
+    @BindView(R.id.addActivityButton) Button mAddActivityButton;
 
     @SuppressLint("NonConstantResourceId")
     @BindView(R.id.datePickerButton) Button mDatePickerButton;
@@ -108,19 +106,19 @@ public class AddActivity extends AppCompatActivity implements View.OnClickListen
         dateButton = findViewById(R.id.datePickerButton);
         dateButton.setText(getTodaysDate());
 
-        mAddLocationButton.setOnClickListener(this);
+        mAddActivityButton.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
-        if (v == mAddLocationButton) {
+        if (v == mAddActivityButton) {
             String location = mEditTextLocationName.getText().toString();
             String activityName = mAutoCompleteTextActivityName.getText().toString();
 
             saveLocationToFirebase(location);
             saveActivityToFirebase(activityName);
 
-            Intent intent = new Intent(AddActivity.this, ActivitiesActivity.class);
+            Intent intent = new Intent(AddActivity.this, ActivitiesDetailActivity.class);
             intent.putExtra("activityName", activityName);
             intent.putExtra("location", location);
             startActivity(intent);
