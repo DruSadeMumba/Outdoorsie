@@ -29,7 +29,7 @@
             tools:ignore="MissingConstraints">
 
             <TextView
-                android:id="@+id/activitiesLocationTextView"
+                android:id="@+id/activitiesLocationDetailTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="location"
@@ -38,12 +38,12 @@
                 tools:ignore="MissingConstraints" />
 
             <TextView
-                android:id="@+id/activitiesNameTextView"
+                android:id="@+id/activitiesNameDetailTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="25sp"
                 android:text="activity"
-                app:layout_constraintBottom_toTopOf="@+id/activitiesLocationTextView"
+                app:layout_constraintBottom_toTopOf="@+id/activitiesLocationDetailTextView"
                 tools:ignore="MissingConstraints" />
         </LinearLayout>
 

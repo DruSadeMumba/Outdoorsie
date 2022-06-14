@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
@@ -18,33 +17,57 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.374">
 
-    <LinearLayout
-        android:id="@+id/linearLayout"
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:background="#ffffff"
-        android:layout_height="wrap_content"
-        android:padding="10dp"
-        tools:ignore="MissingConstraints">
-
-    <TextView
-        android:id="@+id/activitiesLocationTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="location"
-        android:layout_marginTop="20dp"
-        android:textSize="25sp"
-        tools:ignore="MissingConstraints" />
-
         <TextView
-            android:id="@+id/activitiesNameTextView"
-            android:layout_width="wrap_content"
+            android:id="@+id/txt_option"
+            android:layout_width="20dp"
             android:layout_height="wrap_content"
-            android:textSize="25sp"
-            android:text="activity"
-            app:layout_constraintBottom_toTopOf="@+id/activitiesLocationTextView"
-            tools:ignore="MissingConstraints" />
-    </LinearLayout>
+            android:layout_gravity="right"
+            android:text="&#8942;"
+            android:textAlignment="center"
+            android:textSize="20sp"
+            tools:ignore="RtlCompat" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/img_emp"
+                android:layout_width="96dp"
+                android:layout_height="96dp"
+                android:padding="5dp"
+                android:src="@drawable/googleg_standard_color_18" />
+
+            <LinearLayout
+                android:id="@+id/linearLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#ffffff"
+                android:orientation="vertical"
+                android:padding="10dp"
+                tools:ignore="MissingConstraints">
+
+                <TextView
+                    android:id="@+id/activitiesLocationListTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:text="location"
+                    android:textSize="25sp"
+                    tools:ignore="MissingConstraints" />
+
+                <TextView
+                    android:id="@+id/activitiesNameListTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="activity"
+                    android:textSize="25sp"
+                    app:layout_constraintBottom_toTopOf="@+id/activitiesLocationListTextView"
+                    tools:ignore="MissingConstraints" />
+            </LinearLayout>
+        </LinearLayout>
+
     </androidx.cardview.widget.CardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

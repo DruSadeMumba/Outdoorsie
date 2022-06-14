@@ -16,9 +16,12 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.drusade.outdoorsie.Constants;
 import com.drusade.outdoorsie.R;
+import com.drusade.outdoorsie.models.AnActivity;
+import com.drusade.outdoorsie.models.AnActivityResponse;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -26,14 +29,15 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.Calendar;
+import java.util.HashMap;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class AddActivity extends AppCompatActivity implements View.OnClickListener{
+public class AddActivity extends AppCompatActivity {
 
-    String [] activityList = {"Camping", "Biking", "Hiking", "Picnic", "Swimming", "Boating", "Music Festival"};
-    ArrayAdapter<String> adapterActivity;
+    @SuppressLint("NonConstantResourceId")
+    @BindView(R.id.datePickerButton) Button mDatePickerButton;
 
     @SuppressLint("NonConstantResourceId")
     @BindView(R.id.autoCompleteTextActivityName) AutoCompleteTextView mAutoCompleteTextActivityName;
@@ -44,104 +48,84 @@ public class AddActivity extends AppCompatActivity implements View.OnClickListen
     @SuppressLint("NonConstantResourceId")
     @BindView(R.id.addActivityButton) Button mAddActivityButton;
 
-    @SuppressLint("NonConstantResourceId")
-    @BindView(R.id.datePickerButton) Button mDatePickerButton;
-
     private DatePickerDialog datePickerDialog;
     private Button dateButton;
-    private DatabaseReference mTypedLocationReference;
-    private ValueEventListener mTypedLocationReferenceListener;
-    private DatabaseReference mSelectedActivityReference;
-    private ValueEventListener mSelectedActivityReferenceListener;
 
-    @RequiresApi(api = Build.VERSION_CODES.O)
+    String [] activityList = {"Boating", "Biking", "Camping", "Cook Out", "Hiking", "Music Festival", "Picnic", "Sports", "Swimming", "Zip Lining"};
+    ArrayAdapter<String> adapterActivity;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
-        mTypedLocationReference = FirebaseDatabase
-                .getInstance()
-                .getReference()
-                .child(Constants.FIREBASE_CHILD_TYPED_LOCATION);
-
-        mTypedLocationReference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                for (DataSnapshot locationSnapshot : dataSnapshot.getChildren()) {
-                    String location = locationSnapshot.getValue().toString();
-                    Log.d("Locations updated", "location: " + location);
-                }
-            }
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-            }
-        });
-
-        mSelectedActivityReference = FirebaseDatabase
-                .getInstance()
-                .getReference()
-                .child(Constants.FIREBASE_CHILD_SELECTED_ACTIVITY);
-
-        mSelectedActivityReference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                for (DataSnapshot activitySnapshot : dataSnapshot.getChildren()) {
-                    String activity = activitySnapshot.getValue().toString();
-                    Log.d("Activity added", "activity: " + activity);
-                }
-            }
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-            }
-        });
-
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add);
         ButterKnife.bind(this);
+
 
         adapterActivity = new ArrayAdapter<String>(this, R.layout.activities_selection_list_item, activityList);
         mAutoCompleteTextActivityName.setAdapter(adapterActivity);
 
         initDatePicker();
         dateButton = findViewById(R.id.datePickerButton);
+        dateButton.setText(getTodaysDate());adapterActivity = new ArrayAdapter<String>(this, R.layout.activities_selection_list_item, activityList);
+        mAutoCompleteTextActivityName.setAdapter(adapterActivity);
+
+        initDatePicker();
+        dateButton = findViewById(R.id.datePickerButton);
         dateButton.setText(getTodaysDate());
 
-        mAddActivityButton.setOnClickListener(this);
-    }
+        final EditText edit_activityName = findViewById(R.id.autoCompleteTextActivityName);
+        final EditText edit_location = findViewById(R.id.editTextLocationName);
 
-    @Override
-    public void onClick(View v) {
-        if (v == mAddActivityButton) {
-            String location = mEditTextLocationName.getText().toString();
-            String activityName = mAutoCompleteTextActivityName.getText().toString();
+        Button mAddActivityButton = findViewById(R.id.addActivityButton);
 
-            saveLocationToFirebase(location);
-            saveActivityToFirebase(activityName);
-
-            Intent intent = new Intent(AddActivity.this, ActivitiesDetailActivity.class);
-            intent.putExtra("activityName", activityName);
-            intent.putExtra("location", location);
+        Button btn_open = findViewById(R.id.btn_open);
+        btn_open.setOnClickListener(v-> {
+            Intent intent =new Intent(AddActivity.this, ActivitiesListActivity.class);
             startActivity(intent);
+        });
+        AnActivityResponse response = new AnActivityResponse();
+        AnActivity anAct_edit = (AnActivity)getIntent().getSerializableExtra("EDIT");
+        if(anAct_edit !=null)
+        {
+            mAddActivityButton.setText("UPDATE");
+            edit_activityName.setText(anAct_edit.getActivityName());
+            edit_location.setText(anAct_edit.getLocation());
+            btn_open.setVisibility(View.GONE);
         }
+        else
+        {
+            mAddActivityButton.setText("SUBMIT");
+            btn_open.setVisibility(View.VISIBLE);
+        }
+        mAddActivityButton.setOnClickListener(v->
+        {
+            AnActivity anAct = new AnActivity(edit_activityName.getText().toString(), edit_location.getText().toString());
+            if(anAct_edit==null)
+            {
+                response.add(anAct).addOnSuccessListener(suc ->
+                {
+                    Toast.makeText(this, "Activity is inserted", Toast.LENGTH_SHORT).show();
+                }).addOnFailureListener(er ->
+                {
+                    Toast.makeText(this, "" + er.getMessage(), Toast.LENGTH_SHORT).show();
+                });
+            }
+            else
+            {
+                HashMap<String, Object> hashMap = new HashMap<>();
+                hashMap.put("activityName", edit_activityName.getText().toString());
+                hashMap.put("location", edit_location.getText().toString());
+                response.update(anAct_edit.getKey(), hashMap).addOnSuccessListener(suc ->
+                {
+                    Toast.makeText(this, "Record is updated", Toast.LENGTH_SHORT).show();
+                    finish();
+                }).addOnFailureListener(er ->
+                {
+                    Toast.makeText(this, "" + er.getMessage(), Toast.LENGTH_SHORT).show();
+                });
+            }
+        });
     }
-
-    public void saveLocationToFirebase(String location){
-        mTypedLocationReference.push().setValue(location);
-    }
-    public void saveActivityToFirebase(String activityName){
-        mSelectedActivityReference.push().setValue(activityName);
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        mTypedLocationReference.removeEventListener(mTypedLocationReferenceListener);
-        mSelectedActivityReference.removeEventListener(mSelectedActivityReferenceListener);
-    }
-
-
-
-
 
     //Date picker
     private String getTodaysDate()

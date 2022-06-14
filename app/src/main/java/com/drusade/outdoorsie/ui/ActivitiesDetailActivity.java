@@ -41,10 +41,10 @@ public class ActivitiesDetailActivity extends AppCompatActivity implements View.
     @BindView(R.id.viewProfileButton) Button mViewProfileButton;
 
     @SuppressLint("NonConstantResourceId")
-    @BindView(R.id.activitiesNameTextView) TextView mActivitiesNameTextView;
+    @BindView(R.id.activitiesNameDetailTextView) TextView mActivitiesNameDetailTextView;
 
     @SuppressLint("NonConstantResourceId")
-    @BindView(R.id.activitiesLocationTextView) TextView mActivitiesLocationTextView;
+    @BindView(R.id.activitiesLocationDetailTextView) TextView mActivitiesLocationDetailTextView;
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -86,8 +86,8 @@ public class ActivitiesDetailActivity extends AppCompatActivity implements View.
             }
         });
 
-        mActivitiesLocationTextView.setText("Location: " + location);
-        mActivitiesNameTextView.setText("Activity: " + activityName);
+        mActivitiesLocationDetailTextView.setText("Location: " + location);
+        mActivitiesNameDetailTextView.setText("Activity: " + activityName);
 
     }
 
