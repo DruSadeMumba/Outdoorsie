@@ -24,7 +24,7 @@
             android:layout_gravity="right"
             android:text="&#8942;"
             android:textAlignment="center"
-            android:textSize="20sp"
+            android:textSize="50sp"
             tools:ignore="RtlCompat" />
 
         <LinearLayout
@@ -37,7 +37,7 @@
                 android:layout_width="96dp"
                 android:layout_height="96dp"
                 android:padding="5dp"
-                android:src="@drawable/googleg_standard_color_18" />
+                android:src="@drawable/ic_baseline_sports_handball_24" />
 
             <LinearLayout
                 android:id="@+id/linearLayout"
@@ -64,6 +64,15 @@
                     android:text="activity"
                     android:textSize="25sp"
                     app:layout_constraintBottom_toTopOf="@+id/activitiesLocationListTextView"
+                    tools:ignore="MissingConstraints" />
+
+                <TextView
+                    android:id="@+id/activitiesDateListTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Date"
+                    android:textSize="25sp"
+                    app:layout_constraintBottom_toTopOf="@+id/activitiesNameListTextView"
                     tools:ignore="MissingConstraints" />
             </LinearLayout>
         </LinearLayout>

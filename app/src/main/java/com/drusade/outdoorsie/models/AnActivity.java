@@ -9,9 +9,10 @@ public class AnActivity {
     public AnActivity() {
     }
 
-    public AnActivity(String activityName, String location) {
+    public AnActivity(String activityName, String location, long date) {
         this.activityName = activityName;
         this.location = location;
+        this.date = date;
     }
 
     //Getters
