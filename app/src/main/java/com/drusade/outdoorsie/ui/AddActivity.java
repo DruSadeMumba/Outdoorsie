@@ -51,9 +51,13 @@ public class AddActivity extends AppCompatActivity {
     private DatePickerDialog datePickerDialog;
     private Button dateButton;
 
-    String [] activityList = {"Boating", "Biking", "Camping", "Cook Out", "Hiking", "Music Festival", "Picnic", "Sports", "Swimming", "Zip Lining"};
+    String [] activityList = {"Boating", "Biking", "Camping",
+            "Cook Out", "Hiking", "Music Festival", "Picnic",
+            "Sports", "Swimming", "Zip Lining"};
+
     ArrayAdapter<String> adapterActivity;
 
+    @SuppressLint("CutPasteId")
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,21 +92,21 @@ public class AddActivity extends AppCompatActivity {
         AnActivityResponse response = new AnActivityResponse();
         AnActivity anAct_edit = (AnActivity)getIntent().getSerializableExtra("EDIT");
         if(anAct_edit !=null) {
-            mAddActivityButton.setText("UPDATE");
+
             edit_activityName.setText(anAct_edit.getActivityName());
             edit_location.setText(anAct_edit.getLocation());
             date_picker.setText(Math.toIntExact(anAct_edit.getDate()));
             btn_open.setVisibility(View.GONE);
         }
         else {
-            mAddActivityButton.setText("SUBMIT");
+
             btn_open.setVisibility(View.VISIBLE);
         }
         mAddActivityButton.setOnClickListener(v-> {
             AnActivity anAct = new AnActivity(edit_activityName.getText().toString(), edit_location.getText().toString(), date_picker.getAutofillType());
             if(anAct_edit==null) {
                 response.add(anAct).addOnSuccessListener(suc -> {
-                    Toast.makeText(this, "Activity is inserted", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "Activity added!", Toast.LENGTH_SHORT).show();
                 }).addOnFailureListener(er -> {
                     Toast.makeText(this, "" + er.getMessage(), Toast.LENGTH_SHORT).show();
                 });

@@ -10,8 +10,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
+import android.widget.SearchView;
 import android.widget.TextView;
 
 import com.drusade.outdoorsie.Constants;
@@ -29,6 +34,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -40,6 +46,7 @@ public class ActivitiesListActivity extends AppCompatActivity {
     AnActivityResponse response;
     boolean isLoading=false;
     String key =null;
+    List<AnActivity> activities;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -97,70 +104,28 @@ public class ActivitiesListActivity extends AppCompatActivity {
         });
     }
 
-}
-
-
-/*mRecyclerView2.addOnScrollListener(new RecyclerView.OnScrollListener()
-        {
-            @Override
-            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy)
-            {
-                LinearLayoutManager linearLayoutManager = (LinearLayoutManager) mRecyclerView2.getLayoutManager();
-                int totalItem = linearLayoutManager.getItemCount();
-                int lastVisible = linearLayoutManager.findLastCompletelyVisibleItemPosition();
-                if(totalItem< lastVisible+3)
-                {
-                    if(!isLoading)
-                    {
-                        isLoading=true;
-                        loadData();
-                    }
-                }
-            }
-        });
-
-
-        TextView mTextView;
-    RecyclerView mRecyclerView2;
-    ActivitiesListAdapter adapter;
-    AnActivityResponse dao;
-
-
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(layout.activity_activities_list);
-        ButterKnife.bind(this);
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_search, menu);
 
-        mRecyclerView2 = findViewById(id.recyclerView2);
-        LinearLayoutManager manager = new LinearLayoutManager(this);
-        mRecyclerView2.setLayoutManager(manager);
-        adapter = new ActivitiesListAdapter(this);
-        mRecyclerView2.setAdapter(adapter);
-        dao = new AnActivityResponse();
-        loadData();
+        MenuItem menuItem = menu.findItem(R.id.action_search);
+        SearchView searchView = (SearchView) menuItem.getActionView();
 
-    }
-    private void loadData() {
-        dao.getActivities().addValueEventListener(new ValueEventListener() {
-            @SuppressLint("NotifyDataSetChanged")
+        searchView.setImeOptions(EditorInfo.IME_ACTION_DONE);
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-
-                ArrayList<AnActivity> activities = new ArrayList<>();
-
-                for(DataSnapshot data : snapshot.getChildren()){
-                   AnActivity anActivity = data.getValue(AnActivity.class);
-                    activities.add(anActivity);
-                }
-                adapter.setItems(activities);
-                adapter.notifyDataSetChanged();
+            public boolean onQueryTextSubmit(String query) {
+                return false;
             }
 
             @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
+            public boolean onQueryTextChange(String newText) {
+                adapter.getFilter().filter(newText);
+                return false;
             }
         });
+        return true;
     }
-        */
+}
