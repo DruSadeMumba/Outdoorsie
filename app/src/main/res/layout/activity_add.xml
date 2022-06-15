@@ -76,7 +76,7 @@
         android:text="@string/add" />
 
     <Button
-        android:id="@+id/btn_open"
+        android:id="@+id/viewActivitiesListButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
@@ -99,5 +99,16 @@
         android:fontFamily="@font/poppins"
         android:textAllCaps="false"
         android:text="My Profile" />
+
+    <Button
+        android:id="@+id/viewSavedButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_centerHorizontal="true"
+        android:background="@color/colorAccent"
+        android:fontFamily="@font/poppins"
+        android:textAllCaps="false"
+        android:text="Saved" />
 
 </RelativeLayout>

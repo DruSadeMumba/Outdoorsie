@@ -1,6 +1,5 @@
 package com.drusade.outdoorsie.adapters;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Parcelable;
@@ -16,13 +15,16 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.drusade.outdoorsie.Constants;
 import com.drusade.outdoorsie.R;
 import com.drusade.outdoorsie.models.AnActivity;
 import com.drusade.outdoorsie.models.AnActivityResponse;
 import com.drusade.outdoorsie.ui.ActivitiesDetailActivity;
-import com.drusade.outdoorsie.ui.ActivitiesListActivity;
 import com.drusade.outdoorsie.ui.AddActivity;
-import com.drusade.outdoorsie.ui.MainActivity;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,6 +32,7 @@ import java.util.List;
 public class ActivitiesListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> implements Filterable {
 
     private Context context;
+    private AnActivity mAnActivity;
     List<AnActivity> activities = new ArrayList<>();
     List<AnActivity> activitiesFull = new ArrayList<>();
 
@@ -51,12 +54,12 @@ public class ActivitiesListAdapter extends RecyclerView.Adapter<RecyclerView.Vie
     }
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
+
         AnActivity e = activities.get(position);
         FirebaseActivityViewHolder vh = (FirebaseActivityViewHolder) holder;
         AnActivity anAct = e==null? activities.get(position):e;
 
-        vh.mActivityTextView.setText(anAct.getActivityName());
-        vh.mLocationTextView.setText(anAct.getLocation());
+        ((FirebaseActivityViewHolder) holder).bindActivities(activities.get(position));
 
         vh.mViewActivityDetailsButton.setOnClickListener(v -> {
             String location = vh.mLocationTextView.getText().toString();
@@ -65,6 +68,26 @@ public class ActivitiesListAdapter extends RecyclerView.Adapter<RecyclerView.Vie
             intent.putExtra("activityName", activityName);
             intent.putExtra("location", location);
             context.startActivity(intent);
+        });
+
+        vh.mSaveActivityButton.setOnClickListener(v -> {
+            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+            assert user != null;
+            String uid = user.getUid();
+            DatabaseReference activityRef = FirebaseDatabase
+                    .getInstance()
+                    .getReference(Constants.FIREBASE_CHILD_ACTIVITIES)
+                    .child(uid);
+
+            DatabaseReference pushRef = activityRef.push();
+
+            String pushId = pushRef.getKey();
+
+            /*mAnActivity.setPushId(pushId);*/
+
+            pushRef.setValue(mAnActivity);
+            Toast.makeText(context, "Saved", Toast.LENGTH_SHORT).show();
+
         });
 
         vh.mTxt_option.setOnClickListener(v-> {
@@ -83,7 +106,7 @@ public class ActivitiesListAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 
                     case R.id.menu_remove:
                         AnActivityResponse response = new AnActivityResponse();
-                        response.remove(anAct.getKey()).addOnSuccessListener(suc-> {
+                        response.remove(anAct.getKeys()).addOnSuccessListener(suc-> {
                             Toast.makeText(context, "Activity Removed", Toast.LENGTH_SHORT).show();
                             notifyItemRemoved(position);
                             activities.remove(anAct);

@@ -51,8 +51,13 @@ public class AddActivity extends AppCompatActivity implements View.OnClickListen
     @SuppressLint("NonConstantResourceId")
     @BindView(R.id.viewProfileButton) Button mViewProfileButton;
 
+    @SuppressLint("NonConstantResourceId")
+    @BindView(R.id.viewActivitiesListButton) Button mViewActivitiesListButton;
+
+    @SuppressLint("NonConstantResourceId")
+    @BindView(R.id.viewSavedButton) Button mViewSavedButton;
+
     private DatePickerDialog datePickerDialog;
-    private Button dateButton;
 
     String [] activityList = {"Boating", "Biking", "Camping",
             "Cook Out", "Hiking", "Music Festival", "Picnic",
@@ -72,20 +77,13 @@ public class AddActivity extends AppCompatActivity implements View.OnClickListen
         mAutoCompleteTextActivityName.setAdapter(adapterActivity);
 
         initDatePicker();
-        dateButton = findViewById(R.id.datePickerButton);
-        dateButton.setText(getTodaysDate());adapterActivity = new ArrayAdapter<String>(this, R.layout.activities_selection_list_item, activityList);
+
+        mDatePickerButton.setText(getTodaysDate());adapterActivity = new ArrayAdapter<String>(this, R.layout.activities_selection_list_item, activityList);
         mAutoCompleteTextActivityName.setAdapter(adapterActivity);
         mViewProfileButton.setOnClickListener(this);
+        mViewSavedButton.setOnClickListener(this);
 
-
-        final EditText edit_activityName = findViewById(R.id.autoCompleteTextActivityName);
-        final EditText edit_location = findViewById(R.id.editTextLocationName);
-        final Button date_picker = findViewById(R.id.datePickerButton);
-
-        Button mAddActivityButton = findViewById(R.id.addActivityButton);
-
-        Button btn_open = findViewById(R.id.btn_open);
-        btn_open.setOnClickListener(v-> {
+        mViewActivitiesListButton.setOnClickListener(v-> {
             Intent intent =new Intent(AddActivity.this, ActivitiesListActivity.class);
             startActivity(intent);
         });
@@ -94,19 +92,19 @@ public class AddActivity extends AppCompatActivity implements View.OnClickListen
         AnActivity anAct_edit = (AnActivity)getIntent().getSerializableExtra("EDIT");
         if(anAct_edit !=null) {
 
-            edit_activityName.setText(anAct_edit.getActivityName());
-            edit_location.setText(anAct_edit.getLocation());
-            date_picker.setText(Math.toIntExact(anAct_edit.getDate()));
-            btn_open.setVisibility(View.GONE);
+            mAutoCompleteTextActivityName.setText(anAct_edit.getActivityName());
+            mEditTextLocationName.setText(anAct_edit.getLocation());
+            mDatePickerButton.setText(Math.toIntExact(anAct_edit.getDate()));
+            mViewActivitiesListButton.setVisibility(View.GONE);
         }
         else {
 
-            btn_open.setVisibility(View.VISIBLE);
+            mViewActivitiesListButton.setVisibility(View.VISIBLE);
         }
 
         mAddActivityButton.setOnClickListener(v-> {
-            AnActivity anAct = new AnActivity(edit_activityName.getText().toString(), edit_location.getText().toString(), date_picker.getAutofillType());
-            if(anAct_edit==null) {
+            AnActivity anAct = new AnActivity(mAutoCompleteTextActivityName.getText().toString(), mEditTextLocationName.getText().toString(), mDatePickerButton.getAutofillType());
+            if(anAct_edit == null) {
                 response.add(anAct).addOnSuccessListener(suc -> {
                     Toast.makeText(this, "Activity added!", Toast.LENGTH_SHORT).show();
                 }).addOnFailureListener(er -> {
@@ -115,13 +113,14 @@ public class AddActivity extends AppCompatActivity implements View.OnClickListen
             }
             else {
                 HashMap<String, Object> hashMap = new HashMap<>();
-                hashMap.put("activityName", edit_activityName.getText().toString());
-                hashMap.put("location", edit_location.getText().toString());
+                hashMap.put("activityName", mAutoCompleteTextActivityName.getText().toString());
+                hashMap.put("location", mEditTextLocationName.getText().toString());
 
-                response.update(anAct_edit.getKey(), hashMap).addOnSuccessListener(suc -> {
+                response.update(anAct_edit.getKeys(), hashMap).addOnSuccessListener(suc -> {
                     Toast.makeText(this, "Record is updated", Toast.LENGTH_SHORT).show();
                     finish();
-                }).addOnFailureListener(er -> {
+                })
+                        .addOnFailureListener(er -> {
                     Toast.makeText(this, "" + er.getMessage(), Toast.LENGTH_SHORT).show();
                 });
             }
@@ -132,6 +131,10 @@ public class AddActivity extends AppCompatActivity implements View.OnClickListen
     public void onClick(View v){
         if (v == mViewProfileButton) {
             Intent intent = new Intent(AddActivity.this, ProfileActivity.class);
+            startActivity(intent);
+        }
+        if (v == mViewSavedButton){
+            Intent intent = new Intent(AddActivity.this, SavedActivitiesActivity.class);
             startActivity(intent);
         }
     }
@@ -156,7 +159,7 @@ public class AddActivity extends AppCompatActivity implements View.OnClickListen
             {
                 month = month + 1;
                 String date = makeDateString(day, month, year);
-                dateButton.setText(date);
+                mDatePickerButton.setText(date);
             }
         };
 

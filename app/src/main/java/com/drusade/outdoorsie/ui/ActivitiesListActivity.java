@@ -99,7 +99,7 @@ public class ActivitiesListActivity extends AppCompatActivity implements View.On
                 ArrayList<AnActivity> anActs = new ArrayList<>();
                 for (DataSnapshot data : snapshot.getChildren()) {
                     AnActivity anAct = data.getValue(AnActivity.class);
-                    anAct.setKey(data.getKey());
+                    anAct.setKeys(data.getKey());
                     anActs.add(anAct);
                     key = data.getKey();
                 }

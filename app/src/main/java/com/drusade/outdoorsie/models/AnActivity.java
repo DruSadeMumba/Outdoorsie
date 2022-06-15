@@ -4,7 +4,8 @@ public class AnActivity {
     private String activityName;
     private String location;
     private long date;
-    private String key;
+    private String keys;
+    private String pushId;
 
     public AnActivity() {
     }
@@ -19,17 +20,19 @@ public class AnActivity {
     public String getActivityName() {return activityName;}
     public String getLocation() {return location;}
     public long getDate() {return date;}
-    public String getKey()
+    public String getKeys()
     {
-        return key;
+        return keys;
     }
+    public String getPushId() {return pushId;}
 
     //Setters
     public void setActivityName(String activityName) {this.activityName = activityName;}
     public void setLocation(String location) {this.location = location;}
     public void setDate(long date) {this.date = date;}
-    public void setKey(String key)
+    public void setKeys(String key)
     {
-        this.key = key;
+        this.keys = keys;
     }
+    public void setPushId(String pushId) {this.pushId = pushId;}
 }
