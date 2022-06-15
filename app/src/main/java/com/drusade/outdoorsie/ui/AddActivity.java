@@ -34,7 +34,7 @@ import java.util.HashMap;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class AddActivity extends AppCompatActivity {
+public class AddActivity extends AppCompatActivity implements View.OnClickListener {
 
     @SuppressLint("NonConstantResourceId")
     @BindView(R.id.datePickerButton) Button mDatePickerButton;
@@ -47,6 +47,9 @@ public class AddActivity extends AppCompatActivity {
 
     @SuppressLint("NonConstantResourceId")
     @BindView(R.id.addActivityButton) Button mAddActivityButton;
+
+    @SuppressLint("NonConstantResourceId")
+    @BindView(R.id.viewProfileButton) Button mViewProfileButton;
 
     private DatePickerDialog datePickerDialog;
     private Button dateButton;
@@ -65,7 +68,6 @@ public class AddActivity extends AppCompatActivity {
         setContentView(R.layout.activity_add);
         ButterKnife.bind(this);
 
-
         adapterActivity = new ArrayAdapter<String>(this, R.layout.activities_selection_list_item, activityList);
         mAutoCompleteTextActivityName.setAdapter(adapterActivity);
 
@@ -73,10 +75,8 @@ public class AddActivity extends AppCompatActivity {
         dateButton = findViewById(R.id.datePickerButton);
         dateButton.setText(getTodaysDate());adapterActivity = new ArrayAdapter<String>(this, R.layout.activities_selection_list_item, activityList);
         mAutoCompleteTextActivityName.setAdapter(adapterActivity);
+        mViewProfileButton.setOnClickListener(this);
 
-        initDatePicker();
-        dateButton = findViewById(R.id.datePickerButton);
-        dateButton.setText(getTodaysDate());
 
         final EditText edit_activityName = findViewById(R.id.autoCompleteTextActivityName);
         final EditText edit_location = findViewById(R.id.editTextLocationName);
@@ -89,6 +89,7 @@ public class AddActivity extends AppCompatActivity {
             Intent intent =new Intent(AddActivity.this, ActivitiesListActivity.class);
             startActivity(intent);
         });
+
         AnActivityResponse response = new AnActivityResponse();
         AnActivity anAct_edit = (AnActivity)getIntent().getSerializableExtra("EDIT");
         if(anAct_edit !=null) {
@@ -102,6 +103,7 @@ public class AddActivity extends AppCompatActivity {
 
             btn_open.setVisibility(View.VISIBLE);
         }
+
         mAddActivityButton.setOnClickListener(v-> {
             AnActivity anAct = new AnActivity(edit_activityName.getText().toString(), edit_location.getText().toString(), date_picker.getAutofillType());
             if(anAct_edit==null) {
@@ -124,6 +126,14 @@ public class AddActivity extends AppCompatActivity {
                 });
             }
         });
+    }
+
+    @Override
+    public void onClick(View v){
+        if (v == mViewProfileButton) {
+            Intent intent = new Intent(AddActivity.this, ProfileActivity.class);
+            startActivity(intent);
+        }
     }
 
     //Date picker

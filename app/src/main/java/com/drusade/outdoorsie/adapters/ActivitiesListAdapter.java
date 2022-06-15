@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Parcelable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,7 +19,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.drusade.outdoorsie.R;
 import com.drusade.outdoorsie.models.AnActivity;
 import com.drusade.outdoorsie.models.AnActivityResponse;
+import com.drusade.outdoorsie.ui.ActivitiesDetailActivity;
+import com.drusade.outdoorsie.ui.ActivitiesListActivity;
 import com.drusade.outdoorsie.ui.AddActivity;
+import com.drusade.outdoorsie.ui.MainActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,13 +33,13 @@ public class ActivitiesListAdapter extends RecyclerView.Adapter<RecyclerView.Vie
     List<AnActivity> activities = new ArrayList<>();
     List<AnActivity> activitiesFull = new ArrayList<>();
 
-    public ActivitiesListAdapter (Context ctx) {
+    public ActivitiesListAdapter (Context ctx, List<AnActivity> activities) {
         this.activities = activities;
         activitiesFull = new ArrayList<>(activities);
         this.context = ctx;
     }
 
-    public void setItems(ArrayList<AnActivity> anAct) {
+    public void setItems(List<AnActivity> anAct) {
         activities.addAll(anAct);
     }
 
@@ -48,15 +52,21 @@ public class ActivitiesListAdapter extends RecyclerView.Adapter<RecyclerView.Vie
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         AnActivity e = activities.get(position);
-        /*this.onBindViewHolder(holder, position, e);
-    }
-
-    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position, AnActivity e) {*/
         FirebaseActivityViewHolder vh = (FirebaseActivityViewHolder) holder;
         AnActivity anAct = e==null? activities.get(position):e;
 
         vh.mActivityTextView.setText(anAct.getActivityName());
         vh.mLocationTextView.setText(anAct.getLocation());
+
+        vh.mViewActivityDetailsButton.setOnClickListener(v -> {
+            String location = vh.mLocationTextView.getText().toString();
+            String activityName = vh.mActivityTextView.getText().toString();
+            Intent intent = new Intent(context, ActivitiesDetailActivity.class);
+            intent.putExtra("activityName", activityName);
+            intent.putExtra("location", location);
+            context.startActivity(intent);
+        });
+
         vh.mTxt_option.setOnClickListener(v-> {
 
             PopupMenu popupMenu =new PopupMenu(context,vh.mTxt_option);
@@ -98,17 +108,19 @@ public class ActivitiesListAdapter extends RecyclerView.Adapter<RecyclerView.Vie
     public Filter getFilter() {
         return activitiesFilter;
     }
+
     private Filter activitiesFilter = new Filter() {
         @Override
         protected FilterResults performFiltering(CharSequence constraint) {
+            Log.e("constraint", String.valueOf(activities.size()));
             List<AnActivity> filteredList = new ArrayList<>();
             if (constraint == null || constraint.length() == 0) {
-                filteredList.addAll(activitiesFull);
+                filteredList.addAll(activities);
             }
             else {
-                String filterPattern = constraint.toString().toLowerCase().trim();
+                String filterPattern = constraint.toString().toLowerCase();
 
-                for (AnActivity item : activitiesFull) {
+                for (AnActivity item : activities) {
                     if (item.getActivityName().toLowerCase().contains(filterPattern)) {
                         filteredList.add(item);
                     }
@@ -120,6 +132,7 @@ public class ActivitiesListAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 
             FilterResults results = new FilterResults();
             results.values = filteredList;
+            Log.e("VALUES", results.values.toString());
 
             return results;
         }

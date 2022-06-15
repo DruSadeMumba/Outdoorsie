@@ -26,19 +26,13 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class ActivitiesDetailActivity extends AppCompatActivity implements View.OnClickListener {
+public class ActivitiesDetailActivity extends AppCompatActivity{
 
     private ForcastDisplayAdapter mDisplayAdapter;
     private List<Forecast> forecasts;
 
-    /*@SuppressLint("NonConstantResourceId")
-    @BindView(R.id.activitiesTextView) TextView mActivitiesTextView;*/
-
     @SuppressLint("NonConstantResourceId")
     @BindView(R.id.recyclerView) RecyclerView mRecyclerView;
-
-    @SuppressLint("NonConstantResourceId")
-    @BindView(R.id.viewProfileButton) Button mViewProfileButton;
 
     @SuppressLint("NonConstantResourceId")
     @BindView(R.id.activitiesNameDetailTextView) TextView mActivitiesNameDetailTextView;
@@ -53,8 +47,6 @@ public class ActivitiesDetailActivity extends AppCompatActivity implements View.
         setContentView(R.layout.activity_activities_detail);
 
         ButterKnife.bind(this);
-
-        mViewProfileButton.setOnClickListener(this);
 
         Intent intent = getIntent();
         String location = intent.getStringExtra("location");
@@ -91,12 +83,5 @@ public class ActivitiesDetailActivity extends AppCompatActivity implements View.
 
     }
 
-    @Override
-    public void onClick(View v){
-        if (v == mViewProfileButton) {
-            Intent intent = new Intent(ActivitiesDetailActivity.this, ProfileActivity.class);
-            startActivity(intent);
-        }
-    }
     private void showWeather() {mRecyclerView.setVisibility(View.VISIBLE);}
 }

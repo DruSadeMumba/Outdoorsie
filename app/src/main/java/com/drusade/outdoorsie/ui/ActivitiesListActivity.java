@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -16,6 +17,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
+import android.widget.Button;
 import android.widget.SearchView;
 import android.widget.TextView;
 
@@ -39,14 +41,23 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class ActivitiesListActivity extends AppCompatActivity {
+public class ActivitiesListActivity extends AppCompatActivity implements View.OnClickListener {
 
     RecyclerView mRecyclerView;
     ActivitiesListAdapter adapter;
     AnActivityResponse response;
     boolean isLoading=false;
     String key =null;
-    List<AnActivity> activities;
+    List<AnActivity> activities = new ArrayList<>();
+
+    @SuppressLint("NonConstantResourceId")
+    @BindView(R.id.viewActivityDetailsButton) Button mViewActivityDetailsButton;
+
+    @SuppressLint("NonConstantResourceId")
+    @BindView(R.id.activitiesLocationListTextView) TextView mActivitiesLocationListTextView;
+
+    @SuppressLint("NonConstantResourceId")
+    @BindView(R.id.activitiesNameListTextView) TextView mActivitiesNameListTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,10 +68,11 @@ public class ActivitiesListActivity extends AppCompatActivity {
         mRecyclerView.setHasFixedSize(true);
         LinearLayoutManager manager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(manager);
-        adapter = new ActivitiesListAdapter(this);
+        adapter = new ActivitiesListAdapter(this, activities);
         mRecyclerView.setAdapter(adapter);
         response = new AnActivityResponse();
         loadData();
+
         mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
 
             @Override
@@ -127,5 +139,14 @@ public class ActivitiesListActivity extends AppCompatActivity {
             }
         });
         return true;
+    }
+
+
+    @Override
+    public void onClick(View v) {
+        if (v == mViewActivityDetailsButton) {
+            Intent intent = new Intent(ActivitiesListActivity.this, ActivitiesDetailActivity.class);
+            startActivity(intent);
+        }
     }
 }

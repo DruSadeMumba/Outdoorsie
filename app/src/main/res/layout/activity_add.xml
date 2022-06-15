@@ -5,7 +5,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.AddActivity">
+    tools:context=".ui.AddActivity"
+    android:background="@drawable/cute_plant">
 
     <EditText
         android:id="@+id/editTextLocationName"
@@ -38,6 +39,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="none"
+            android:fontFamily="@font/poppins"
             android:textColor="@color/black" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -48,6 +50,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
+        android:fontFamily="@font/poppins"
         android:layout_alignParentBottom="true"
         android:layout_marginStart="100dp"
         android:layout_marginEnd="102dp"
@@ -64,22 +67,37 @@
         android:id="@+id/addActivityButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="161dp"
-        android:layout_marginEnd="162dp"
-        android:layout_marginBottom="259dp"
+        android:layout_marginEnd="50dp"
+        android:layout_marginBottom="260dp"
+        android:fontFamily="@font/poppins"
+        android:textAllCaps="false"
         android:text="@string/add" />
 
     <Button
         android:id="@+id/btn_open"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-
+        android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="259dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginBottom="260dp"
+        android:fontFamily="@font/poppins"
         android:gravity="center"
-        android:text="Open" />
+        android:textAllCaps="false"
+        android:text="View" />
+
+    <Button
+        android:id="@+id/viewProfileButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:background="@color/colorAccent"
+        android:fontFamily="@font/poppins"
+        android:textAllCaps="false"
+        android:text="My Profile" />
 
 </RelativeLayout>
