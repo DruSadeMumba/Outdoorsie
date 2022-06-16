@@ -68,7 +68,7 @@ public class MyProfileFragment extends DialogFragment {
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth){
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 if (user != null) {
-
+                    mMyProfileName.setText(user.getDisplayName());
                 } else {
 
                 }
