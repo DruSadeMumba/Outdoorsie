@@ -37,6 +37,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -63,6 +64,8 @@ public class ActivitiesListActivity extends AppCompatActivity implements View.On
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(layout.activity_activities_list);
+
+        Objects.requireNonNull(getSupportActionBar()).setTitle("ACTIVITIES");
 
         mRecyclerView = findViewById(id.recyclerView2);
         mRecyclerView.setHasFixedSize(true);
