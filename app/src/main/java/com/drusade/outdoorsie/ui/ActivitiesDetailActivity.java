@@ -46,9 +46,6 @@ public class ActivitiesDetailActivity extends AppCompatActivity {
     @SuppressLint("NonConstantResourceId")
     @BindView(R.id.activitiesLocationDetailTextView) TextView mActivitiesLocationDetailTextView;
 
-    @SuppressLint("NonConstantResourceId")
-    @BindView(R.id.saveActivityButton) Button mSaveActivityButton;
-
     @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {

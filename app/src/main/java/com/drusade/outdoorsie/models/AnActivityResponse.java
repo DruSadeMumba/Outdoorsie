@@ -20,24 +20,23 @@ public class AnActivityResponse {
                 .getInstance()
                 .getReference(AnActivity.class.getSimpleName());
     }
-    public Task<Void> add(AnActivity anAct)
-    {
+
+    public Task<Void> add(AnActivity anAct) {
+
         return mDatabaseReference.push().setValue(anAct);
     }
 
-    public Task<Void> update(String key, HashMap<String ,Object> hashMap)
-    {
+    public Task<Void> update(String key, HashMap<String ,Object> hashMap) { //not working
         return mDatabaseReference.child(key).updateChildren(hashMap);
     }
-    public Task<Void> remove(String key)
-    {
+
+    public Task<Void> remove(String key) {
+
         return mDatabaseReference.child(key).removeValue();
     }
 
-    public Query get(String key)
-    {
-        if(key == null)
-        {
+    public Query get(String key) {
+        if(key == null) {
             return mDatabaseReference.orderByKey().limitToFirst(8);
         }
         return mDatabaseReference.orderByKey().startAfter(key).limitToFirst(8);

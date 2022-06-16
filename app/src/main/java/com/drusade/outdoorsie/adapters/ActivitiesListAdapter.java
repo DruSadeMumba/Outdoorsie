@@ -1,5 +1,6 @@
 package com.drusade.outdoorsie.adapters;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
@@ -29,17 +30,19 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 public class ActivitiesListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> implements Filterable {
 
     private Context context;
-    List<AnActivity> activities = new ArrayList<>();
-    List<AnActivity> activitiesFull = new ArrayList<>();
+    List<AnActivity> activities;
+    List<AnActivity> activitiesFull;
 
     public ActivitiesListAdapter (Context ctx, List<AnActivity> activities) {
         this.activities = activities;
-        activitiesFull = new ArrayList<>(activities);
+        activitiesFull = new ArrayList<>();
+        activitiesFull.addAll(activities);
         this.context = ctx;
     }
 
@@ -124,11 +127,13 @@ public class ActivitiesListAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 
     @Override
     public int getItemCount() {
+
         return activities.size();
     }
 
     @Override
     public Filter getFilter() {
+
         return activitiesFilter;
     }
 
@@ -136,7 +141,9 @@ public class ActivitiesListAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         @Override
         protected FilterResults performFiltering(CharSequence constraint) {
             Log.e("constraint", String.valueOf(activities.size()));
+
             List<AnActivity> filteredList = new ArrayList<>();
+
             if (constraint == null || constraint.length() == 0) {
                 filteredList.addAll(activities);
             }
@@ -144,10 +151,10 @@ public class ActivitiesListAdapter extends RecyclerView.Adapter<RecyclerView.Vie
                 String filterPattern = constraint.toString().toLowerCase();
 
                 for (AnActivity item : activities) {
-                    if (item.getActivityName().toLowerCase().contains(filterPattern)) {
+                    if (item.getActivityName().toLowerCase().contains(filterPattern.toLowerCase())) {
                         filteredList.add(item);
                     }
-                    if (item.getLocation().toLowerCase().contains(filterPattern)) {
+                    if (item.getLocation().toLowerCase().contains(filterPattern.toLowerCase())) {
                         filteredList.add(item);
                     }
                 }
@@ -160,10 +167,12 @@ public class ActivitiesListAdapter extends RecyclerView.Adapter<RecyclerView.Vie
             return results;
         }
 
+        @SuppressLint("NotifyDataSetChanged")
         @Override
         protected void publishResults(CharSequence constraint, FilterResults results) {
             activities.clear();
-            activities.addAll((List) results.values);
+            activities.addAll((Collection<? extends AnActivity>) results.values);
+            /*activities.addAll((List) results.values);*/
             notifyDataSetChanged();
         }
     };

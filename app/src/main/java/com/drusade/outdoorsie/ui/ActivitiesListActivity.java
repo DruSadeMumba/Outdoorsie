@@ -74,7 +74,6 @@ public class ActivitiesListActivity extends AppCompatActivity implements View.On
         loadData();
 
         mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
-
             @Override
             public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
                 LinearLayoutManager linearLayoutManager = (LinearLayoutManager) recyclerView.getLayoutManager();
@@ -92,7 +91,6 @@ public class ActivitiesListActivity extends AppCompatActivity implements View.On
     }
 
     private void loadData() {
-
         response.get(key).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -106,7 +104,6 @@ public class ActivitiesListActivity extends AppCompatActivity implements View.On
                 adapter.setItems(anActs);
                 adapter.notifyDataSetChanged();
                 isLoading =false;
-
             }
 
             @Override
@@ -124,11 +121,10 @@ public class ActivitiesListActivity extends AppCompatActivity implements View.On
         MenuItem menuItem = menu.findItem(R.id.action_search);
         SearchView searchView = (SearchView) menuItem.getActionView();
 
-        searchView.setImeOptions(EditorInfo.IME_ACTION_DONE);
-
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
+
                 return false;
             }
 
@@ -138,7 +134,7 @@ public class ActivitiesListActivity extends AppCompatActivity implements View.On
                 return false;
             }
         });
-        return true;
+        return super.onCreateOptionsMenu(menu);
     }
 
 

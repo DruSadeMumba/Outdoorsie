@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.drusade.outdoorsie.Constants;
 import com.drusade.outdoorsie.R;
@@ -32,6 +33,9 @@ public class SavedActivitiesActivity extends AppCompatActivity {
 
     @SuppressLint("NonConstantResourceId")
     @BindView(R.id.recyclerView2) RecyclerView mRecyclerView2;
+
+    @SuppressLint("NonConstantResourceId")
+    @BindView(R.id.activitiesTitleTextView) TextView mActivitiesTitleTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,6 +74,7 @@ public class SavedActivitiesActivity extends AppCompatActivity {
 
         mRecyclerView2.setLayoutManager(new LinearLayoutManager(this));
         mRecyclerView2.setAdapter(mFirebaseAdapter);
+        mActivitiesTitleTextView.setText(R.string.ss);
     }
 
     private void showActivities() {
