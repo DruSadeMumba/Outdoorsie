@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorPrimaryDark"
     tools:context=".ui.fragments.MyProfileFragment">
 
     <ImageView
@@ -14,11 +15,13 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="3dp"
-        android:layout_marginTop="47dp"
-        android:layout_marginEnd="198dp"
-        android:layout_marginBottom="514dp"
-        android:background="@drawable/ic_baseline_person_24"
+        android:background="@drawable/ic_outline_person_24"
+        app:layout_constraintBottom_toBottomOf="@+id/viewSavedButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.028"
         tools:ignore="MissingConstraints" />
 
     <TextView
@@ -31,13 +34,32 @@
         android:layout_alignParentBottom="true"
         android:fontFamily="@font/poppins"
         android:text="Your Name"
+        android:textColor="@color/colorPrimaryLight"
         android:textSize="40dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.308" />
+        app:layout_constraintVertical_bias="0.302" />
+
+    <TextView
+        android:id="@+id/myProfileEmail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:fontFamily="@font/poppins"
+        android:text="Your Email"
+        android:textColor="@color/colorSecondaryText"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.383" />
 
     <Button
         android:id="@+id/viewSavedButton"

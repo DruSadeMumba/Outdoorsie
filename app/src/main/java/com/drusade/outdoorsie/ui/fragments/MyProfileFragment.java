@@ -42,6 +42,8 @@ public class MyProfileFragment extends DialogFragment {
     @SuppressLint("NonConstantResourceId")
     @BindView(R.id.myProfileName) TextView mMyProfileName;
 
+    @BindView(R.id.myProfileEmail) TextView mMyProfileEmail;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -69,7 +71,9 @@ public class MyProfileFragment extends DialogFragment {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 if (user != null) {
                     mMyProfileName.setText(user.getDisplayName());
-                } else {
+                    mMyProfileEmail.setText(user.getEmail());
+                } 
+                else {
 
                 }
             }
