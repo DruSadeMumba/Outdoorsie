@@ -11,12 +11,18 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.drusade.outdoorsie.Constants;
 import com.drusade.outdoorsie.R;
 import com.drusade.outdoorsie.adapters.ForcastDisplayAdapter;
+import com.drusade.outdoorsie.models.AnActivity;
 import com.drusade.outdoorsie.models.Forecast;
 import com.drusade.outdoorsie.models.YahooWeatherLocationSearchResponse;
 import com.drusade.outdoorsie.network.YahooWeatherApi;
 import com.drusade.outdoorsie.network.YahooWeatherClient;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.List;
 
@@ -26,7 +32,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class ActivitiesDetailActivity extends AppCompatActivity{
+public class ActivitiesDetailActivity extends AppCompatActivity {
 
     private ForcastDisplayAdapter mDisplayAdapter;
     private List<Forecast> forecasts;
@@ -39,6 +45,9 @@ public class ActivitiesDetailActivity extends AppCompatActivity{
 
     @SuppressLint("NonConstantResourceId")
     @BindView(R.id.activitiesLocationDetailTextView) TextView mActivitiesLocationDetailTextView;
+
+    @SuppressLint("NonConstantResourceId")
+    @BindView(R.id.saveActivityButton) Button mSaveActivityButton;
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -84,4 +93,5 @@ public class ActivitiesDetailActivity extends AppCompatActivity{
     }
 
     private void showWeather() {mRecyclerView.setVisibility(View.VISIBLE);}
+
 }

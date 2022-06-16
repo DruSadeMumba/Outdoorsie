@@ -54,9 +54,6 @@ public class AddActivity extends AppCompatActivity implements View.OnClickListen
     @SuppressLint("NonConstantResourceId")
     @BindView(R.id.viewActivitiesListButton) Button mViewActivitiesListButton;
 
-    @SuppressLint("NonConstantResourceId")
-    @BindView(R.id.viewSavedButton) Button mViewSavedButton;
-
     private DatePickerDialog datePickerDialog;
 
     String [] activityList = {"Boating", "Biking", "Camping",
@@ -81,7 +78,6 @@ public class AddActivity extends AppCompatActivity implements View.OnClickListen
         mDatePickerButton.setText(getTodaysDate());adapterActivity = new ArrayAdapter<String>(this, R.layout.activities_selection_list_item, activityList);
         mAutoCompleteTextActivityName.setAdapter(adapterActivity);
         mViewProfileButton.setOnClickListener(this);
-        mViewSavedButton.setOnClickListener(this);
 
         mViewActivitiesListButton.setOnClickListener(v-> {
             Intent intent =new Intent(AddActivity.this, ActivitiesListActivity.class);
@@ -116,7 +112,7 @@ public class AddActivity extends AppCompatActivity implements View.OnClickListen
                 hashMap.put("activityName", mAutoCompleteTextActivityName.getText().toString());
                 hashMap.put("location", mEditTextLocationName.getText().toString());
 
-                response.update(anAct_edit.getKeys(), hashMap).addOnSuccessListener(suc -> {
+                response.update(anAct_edit.getKey(), hashMap).addOnSuccessListener(suc -> {
                     Toast.makeText(this, "Record is updated", Toast.LENGTH_SHORT).show();
                     finish();
                 })
@@ -131,10 +127,6 @@ public class AddActivity extends AppCompatActivity implements View.OnClickListen
     public void onClick(View v){
         if (v == mViewProfileButton) {
             Intent intent = new Intent(AddActivity.this, ProfileActivity.class);
-            startActivity(intent);
-        }
-        if (v == mViewSavedButton){
-            Intent intent = new Intent(AddActivity.this, SavedActivitiesActivity.class);
             startActivity(intent);
         }
     }

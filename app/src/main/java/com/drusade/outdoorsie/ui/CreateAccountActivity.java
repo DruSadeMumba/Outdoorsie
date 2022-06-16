@@ -35,12 +35,10 @@ public class CreateAccountActivity extends AppCompatActivity implements View.OnC
     private String mName;
 
     @SuppressLint("NonConstantResourceId")
-    @BindView(R.id.createUserButton)
-    Button mCreateUserButton;
+    @BindView(R.id.createUserButton) Button mCreateUserButton;
 
     @SuppressLint("NonConstantResourceId")
-    @BindView(R.id.nameEditText)
-    EditText mNameEditText;
+    @BindView(R.id.nameEditText) EditText mNameEditText;
 
     @SuppressLint("NonConstantResourceId")
     @BindView(R.id.emailEditText) EditText mEmailEditText;
@@ -55,8 +53,7 @@ public class CreateAccountActivity extends AppCompatActivity implements View.OnC
     @BindView(R.id.loginTextView) TextView mLoginTextView;
 
     @SuppressLint("NonConstantResourceId")
-    @BindView(R.id.firebaseProgressBar)
-    ProgressBar mSignInProgressBar;
+    @BindView(R.id.firebaseProgressBar) ProgressBar mSignInProgressBar;
 
     @SuppressLint("NonConstantResourceId")
     @BindView(R.id.loadingTextView) TextView mLoadingSignUp;
@@ -133,6 +130,7 @@ public class CreateAccountActivity extends AppCompatActivity implements View.OnC
             public void onComplete(@NonNull Task<AuthResult> task) {
                 hideProgressBar();
                 if (task.isSuccessful()) {
+                    Log.d(TAG, "Authentication successful");
                     createFirebaseUserProfile(Objects.requireNonNull(task.getResult().getUser()));
                 } else {
                     Toast.makeText(CreateAccountActivity.this, "Authentication failed.",
@@ -163,6 +161,7 @@ public class CreateAccountActivity extends AppCompatActivity implements View.OnC
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if (task.isSuccessful()) {
+                    Log.d(TAG, Objects.requireNonNull(user.getDisplayName()));
                     Toast.makeText(CreateAccountActivity.this, "The display name has been set", Toast.LENGTH_LONG).show();
                 }
             }

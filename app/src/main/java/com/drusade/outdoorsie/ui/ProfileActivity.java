@@ -25,7 +25,7 @@ public class ProfileActivity extends AppCompatActivity {
     @SuppressLint("NonConstantResourceId")
     @BindView(R.id.fragmentContainer) FrameLayout mFragmentContainer;
 
-    MyActivitiesFragment mMyActivities = new MyActivitiesFragment();
+    /*MyActivitiesFragment mMyActivities = new MyActivitiesFragment();*/
     MyProfileFragment mMyProfile = new MyProfileFragment();
     ExitFragment mExit = new ExitFragment();
 
@@ -35,7 +35,7 @@ public class ProfileActivity extends AppCompatActivity {
         setContentView(R.layout.activity_profile);
         ButterKnife.bind(this);
 
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, mMyActivities).commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, mMyProfile).commit();
 
         mBottomNav.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
 
@@ -43,9 +43,9 @@ public class ProfileActivity extends AppCompatActivity {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
-                    case R.id.myActivities:
+                    /*case R.id.myActivities:
                         getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, mMyActivities).commit();
-                        return true;
+                        return true;*/
                     case R.id.profile:
                         getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, mMyProfile).commit();
                         return true;

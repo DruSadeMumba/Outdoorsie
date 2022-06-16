@@ -22,9 +22,9 @@
             android:id="@+id/linearLayout"
             android:orientation="vertical"
             android:layout_width="match_parent"
-            android:background="#ffffff"
             android:layout_height="wrap_content"
             android:padding="10dp"
+            android:background="@color/colorPrimaryDark"
             tools:ignore="MissingConstraints">
 
             <TextView
@@ -34,6 +34,8 @@
                 android:text="location"
                 android:layout_marginTop="10dp"
                 android:textSize="25sp"
+                android:fontFamily="@font/poppins"
+                android:textColor="@color/colorTextIcons"
                 tools:ignore="MissingConstraints" />
 
             <TextView
@@ -41,9 +43,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="25sp"
+                android:textColor="@color/colorTextIcons"
                 android:text="activity"
                 app:layout_constraintBottom_toTopOf="@+id/activitiesLocationDetailTextView"
                 tools:ignore="MissingConstraints" />
+
         </LinearLayout>
 
     </androidx.cardview.widget.CardView>
@@ -51,7 +55,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout"
         android:layout_width="match_parent"
-        android:layout_height="530dp"
+        android:layout_height="0dp"
         android:layout_marginBottom="1dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -66,6 +70,7 @@
             android:layout_height="match_parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            android:background="@color/colorPrimaryLight"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"

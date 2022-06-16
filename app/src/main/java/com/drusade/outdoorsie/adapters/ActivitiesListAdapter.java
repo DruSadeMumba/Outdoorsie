@@ -2,6 +2,7 @@ package com.drusade.outdoorsie.adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Parcelable;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -13,6 +14,7 @@ import android.widget.PopupMenu;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.drusade.outdoorsie.Constants;
@@ -32,7 +34,6 @@ import java.util.List;
 public class ActivitiesListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> implements Filterable {
 
     private Context context;
-    private AnActivity mAnActivity;
     List<AnActivity> activities = new ArrayList<>();
     List<AnActivity> activitiesFull = new ArrayList<>();
 
@@ -52,6 +53,7 @@ public class ActivitiesListAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.activities_list_recycler_view_item, parent,false);
         return new FirebaseActivityViewHolder(view);
     }
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
 
@@ -71,6 +73,7 @@ public class ActivitiesListAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         });
 
         vh.mSaveActivityButton.setOnClickListener(v -> {
+            AnActivity mAnActivity = new AnActivity(vh.mActivityTextView.getText().toString(), vh.mLocationTextView.getText().toString(), vh.mDateTextView.getAutofillType());
             FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
             assert user != null;
             String uid = user.getUid();
@@ -82,12 +85,9 @@ public class ActivitiesListAdapter extends RecyclerView.Adapter<RecyclerView.Vie
             DatabaseReference pushRef = activityRef.push();
 
             String pushId = pushRef.getKey();
-
-            /*mAnActivity.setPushId(pushId);*/
-
+            mAnActivity.setPushId(pushId);
             pushRef.setValue(mAnActivity);
             Toast.makeText(context, "Saved", Toast.LENGTH_SHORT).show();
-
         });
 
         vh.mTxt_option.setOnClickListener(v-> {
@@ -106,7 +106,7 @@ public class ActivitiesListAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 
                     case R.id.menu_remove:
                         AnActivityResponse response = new AnActivityResponse();
-                        response.remove(anAct.getKeys()).addOnSuccessListener(suc-> {
+                        response.remove(anAct.getKey()).addOnSuccessListener(suc-> {
                             Toast.makeText(context, "Activity Removed", Toast.LENGTH_SHORT).show();
                             notifyItemRemoved(position);
                             activities.remove(anAct);

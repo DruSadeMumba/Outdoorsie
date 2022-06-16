@@ -6,7 +6,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
-import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -40,10 +39,10 @@ public class SavedActivitiesActivity extends AppCompatActivity {
         setContentView(R.layout.activity_activities_list);
         ButterKnife.bind(this);
 
-        /*FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        String uid = user.getUid();*/
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        String uid = user.getUid();
 
-        mMyActivitiesReference = FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_CHILD_ACTIVITIES)/*.child(uid)*/;
+        mMyActivitiesReference = FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_CHILD_ACTIVITIES).child(uid);
         SetUpFirebaseAdapter();
         showActivities();
 
@@ -74,6 +73,7 @@ public class SavedActivitiesActivity extends AppCompatActivity {
     }
 
     private void showActivities() {
+
         mRecyclerView2.setVisibility(View.VISIBLE);
     }
 

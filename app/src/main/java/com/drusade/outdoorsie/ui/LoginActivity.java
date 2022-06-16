@@ -143,11 +143,3 @@ import butterknife.ButterKnife;
 
 
 
-
-
-  /*FragmentManager fragmentManager = getSupportFragmentManager();
-                  FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                  Bundle bundle = new Bundle();
-                  bundle.putString("username", username);
-                  MyProfileFragment myProfileFragment = new MyProfileFragment();
-                  myProfileFragment.setArguments(bundle);*/
