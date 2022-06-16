@@ -1,5 +1,6 @@
 package com.drusade.outdoorsie.ui;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
@@ -15,13 +16,19 @@ import android.widget.TextView;
 import com.drusade.outdoorsie.Constants;
 import com.drusade.outdoorsie.R;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.Objects;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+
+    private FirebaseAuth mAuth;
+    private FirebaseAuth.AuthStateListener mAuthListener;
 
     @SuppressLint("NonConstantResourceId")
     @BindView(R.id.viewActivitiesButton) Button mViewActivitiesButton;
@@ -43,6 +50,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         mViewActivitiesButton.setOnClickListener(this);
         mAddActivitiesButton.setOnClickListener(this);
+
+        mAuth = FirebaseAuth.getInstance();
+        mAuthListener = new FirebaseAuth.AuthStateListener(){
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth){
+                FirebaseUser user = firebaseAuth.getCurrentUser();
+                if (user != null) {
+                    Objects.requireNonNull(getSupportActionBar()).setTitle("Hello, " + user.getDisplayName());
+                } else {
+
+                }
+            }
+        };
     }
 
     @Override
@@ -80,5 +100,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
         finish();
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        mAuth.addAuthStateListener(mAuthListener);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        if (mAuthListener != null) {
+            mAuth.removeAuthStateListener(mAuthListener);
+        }
     }
 }
