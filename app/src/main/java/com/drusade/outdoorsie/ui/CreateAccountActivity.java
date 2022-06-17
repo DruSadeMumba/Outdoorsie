@@ -58,6 +58,11 @@ public class CreateAccountActivity extends AppCompatActivity implements View.OnC
     @SuppressLint("NonConstantResourceId")
     @BindView(R.id.loadingTextView) TextView mLoadingSignUp;
 
+    @SuppressLint("NonConstantResourceId")
+    @BindView(R.id.createAccountTitleTextView) TextView mCreateAccountTitleTextView;
+
+    float v = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,6 +75,30 @@ public class CreateAccountActivity extends AppCompatActivity implements View.OnC
         mCreateUserButton.setOnClickListener(this);
 
         createAuthStateListener();
+
+        mCreateAccountTitleTextView.setTranslationX(300);
+        mNameEditText.setTranslationX(300);
+        mEmailEditText.setTranslationX(300);
+        mPasswordEditText.setTranslationX(300);
+        mConfirmPasswordEditText.setTranslationX(300);
+        mCreateUserButton.setTranslationY(300);
+        mLoginTextView.setTranslationY(300);
+
+        mCreateAccountTitleTextView.setAlpha(v);
+        mNameEditText.setAlpha(v);
+        mEmailEditText.setAlpha(v);
+        mPasswordEditText.setAlpha(v);
+        mConfirmPasswordEditText.setAlpha(v);
+        mCreateUserButton.setAlpha(v);
+        mLoginTextView.setAlpha(v);
+
+        mCreateAccountTitleTextView.animate().translationX(0).alpha(1).setDuration(1000).setStartDelay(400).start();
+        mNameEditText.animate().translationX(0).alpha(1).setDuration(1000).setStartDelay(600).start();
+        mEmailEditText.animate().translationX(0).alpha(1).setDuration(1000).setStartDelay(800).start();
+        mPasswordEditText.animate().translationX(0).alpha(1).setDuration(1000).setStartDelay(1000).start();
+        mConfirmPasswordEditText.animate().translationX(0).alpha(1).setDuration(1000).setStartDelay(1200).start();
+        mCreateUserButton.animate().translationY(0).alpha(1).setDuration(1000).setStartDelay(1400).start();
+        mLoginTextView.animate().translationY(0).alpha(1).setDuration(1000).setStartDelay(1500).start();
     }
 
     private void showProgressBar() {
