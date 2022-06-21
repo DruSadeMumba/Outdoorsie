@@ -31,8 +31,7 @@ import butterknife.ButterKnife;
       public static final String TAG = LoginActivity.class.getSimpleName();
 
       @SuppressLint("NonConstantResourceId")
-      @BindView(R.id.registerTextView)
-      TextView mRegisterTextView;
+      @BindView(R.id.registerTextView) TextView mRegisterTextView;
 
       @SuppressLint("NonConstantResourceId")
       @BindView(R.id.emailEditText) EditText mEmailEditText;
@@ -100,18 +99,18 @@ import butterknife.ButterKnife;
               return;
           }
           mAuth.signInWithEmailAndPassword(email, password)
-                  .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                      @Override
-                      public void onComplete(@NonNull Task<AuthResult> task) {
-                          hideProgressBar();
-                          Log.d(TAG, "signInWithEmail:onComplete:" + task.isSuccessful());
-                          if (!task.isSuccessful()) {
-                              Log.w(TAG, "signInWithEmail", task.getException());
-                              Toast.makeText(LoginActivity.this, "Authentication failed.",
-                                      Toast.LENGTH_SHORT).show();
-                          }
+              .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                  @Override
+                  public void onComplete(@NonNull Task<AuthResult> task) {
+                      hideProgressBar();
+                      Log.d(TAG, "signInWithEmail:onComplete:" + task.isSuccessful());
+                      if (!task.isSuccessful()) {
+                          Log.w(TAG, "signInWithEmail", task.getException());
+                          Toast.makeText(LoginActivity.this, "Authentication failed.",
+                                  Toast.LENGTH_SHORT).show();
                       }
-                  });
+                  }
+              });
       }
 
       @Override

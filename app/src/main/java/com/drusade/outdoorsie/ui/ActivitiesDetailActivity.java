@@ -89,6 +89,7 @@ public class ActivitiesDetailActivity extends AppCompatActivity {
 
     }
 
-    private void showWeather() {mRecyclerView.setVisibility(View.VISIBLE);}
-
+    private void showWeather() {
+        mRecyclerView.setVisibility(View.VISIBLE);
+    }
 }

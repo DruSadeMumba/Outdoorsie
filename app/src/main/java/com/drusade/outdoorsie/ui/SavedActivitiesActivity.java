@@ -77,7 +77,6 @@ public class SavedActivitiesActivity extends AppCompatActivity {
     }
 
     private void showActivities() {
-
         mRecyclerView2.setVisibility(View.VISIBLE);
     }
 

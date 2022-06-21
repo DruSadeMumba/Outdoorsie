@@ -25,7 +25,6 @@ public class ProfileActivity extends AppCompatActivity {
     @SuppressLint("NonConstantResourceId")
     @BindView(R.id.fragmentContainer) FrameLayout mFragmentContainer;
 
-    /*MyActivitiesFragment mMyActivities = new MyActivitiesFragment();*/
     MyProfileFragment mMyProfile = new MyProfileFragment();
     ExitFragment mExit = new ExitFragment();
 
@@ -43,9 +42,6 @@ public class ProfileActivity extends AppCompatActivity {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
-                    /*case R.id.myActivities:
-                        getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, mMyActivities).commit();
-                        return true;*/
                     case R.id.profile:
                         getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, mMyProfile).commit();
                         return true;
