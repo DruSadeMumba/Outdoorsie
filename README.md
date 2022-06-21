@@ -12,6 +12,7 @@ The users can then choose to join another users activities.
 ###  Our application should:
 #### Allow a user to :
 * Create an account
+* Upload a profile picture
 * Sign in if they already have an account
 * Create an activity
 * View activities posted by other users.
