@@ -14,12 +14,21 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.drusade.outdoorsie.Constants;
 import com.drusade.outdoorsie.R;
+import com.drusade.outdoorsie.adapters.FirebaseActivityViewHolder;
+import com.drusade.outdoorsie.models.AnActivity;
 import com.drusade.outdoorsie.ui.ProfileActivity;
 import com.drusade.outdoorsie.ui.SavedActivitiesActivity;
+import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -28,9 +37,14 @@ public class MyProfileFragment extends DialogFragment {
 
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
+    private DatabaseReference mMyActivitiesReference;
+    private FirebaseRecyclerAdapter<AnActivity, FirebaseActivityViewHolder> mFirebaseAdapter;
 
     @SuppressLint("NonConstantResourceId")
-    @BindView(R.id.viewSavedButton) Button mViewSavedButton;
+    @BindView(R.id.recyclerView2) RecyclerView mRecyclerView2;
+
+    /*@SuppressLint("NonConstantResourceId")
+    @BindView(R.id.viewSavedButton) Button mViewSavedButton;*/
 
     @SuppressLint("NonConstantResourceId")
     @BindView(R.id.myProfilePic) ImageView mMyProfilePic;
@@ -52,10 +66,17 @@ public class MyProfileFragment extends DialogFragment {
         super.onViewCreated(view, savedInstanceState);
         ButterKnife.bind(this,view);
 
-        mViewSavedButton.setOnClickListener(v -> {
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        String uid = user.getUid();
+
+        mMyActivitiesReference = FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_CHILD_ACTIVITIES).child(uid);
+        SetUpFirebaseAdapter();
+        showActivities();
+
+        /*mViewSavedButton.setOnClickListener(v -> {
             Intent intent = new Intent(getActivity(), SavedActivitiesActivity.class);
             ((ProfileActivity) getActivity()).startActivity(intent);
-        });
+        });*/
 
         mAuth = FirebaseAuth.getInstance();
         mAuthListener = new FirebaseAuth.AuthStateListener(){
@@ -74,10 +95,45 @@ public class MyProfileFragment extends DialogFragment {
         };
     }
 
+    private void SetUpFirebaseAdapter() {
+        FirebaseRecyclerOptions<AnActivity> options =
+                new FirebaseRecyclerOptions.Builder<AnActivity>()
+                        .setQuery(mMyActivitiesReference, AnActivity.class)
+                        .build();
+
+        mFirebaseAdapter = new FirebaseRecyclerAdapter<AnActivity, FirebaseActivityViewHolder>(options) {
+            @Override
+            protected void onBindViewHolder(@NonNull FirebaseActivityViewHolder firebaseActivityViewHolder, int position, @NonNull AnActivity anAct) {
+                firebaseActivityViewHolder.bindActivities(anAct);
+            }
+
+            @NonNull
+            @Override
+            public FirebaseActivityViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.activities_list_recycler_view_item, parent, false);
+                return new FirebaseActivityViewHolder(view);
+            }
+        };
+
+
+        mRecyclerView2.setLayoutManager(new LinearLayoutManager(getActivity()));
+        mRecyclerView2.setAdapter(mFirebaseAdapter);
+    }
+
+    private void showActivities() {
+
+        mRecyclerView2.setVisibility(View.VISIBLE);
+    }
+
     @Override
     public void onStart() {
         super.onStart();
-        mAuth.addAuthStateListener(mAuthListener);
+        if(mAuthListener != null) {
+            mAuth.addAuthStateListener(mAuthListener);
+        }
+        if(mFirebaseAdapter!= null){
+            mFirebaseAdapter.startListening();
+        }
     }
 
     @Override
@@ -85,6 +141,9 @@ public class MyProfileFragment extends DialogFragment {
         super.onStop();
         if (mAuthListener != null) {
             mAuth.removeAuthStateListener(mAuthListener);
+        }
+        if (mFirebaseAdapter!= null) {
+            mFirebaseAdapter.stopListening();
         }
     }
 }
