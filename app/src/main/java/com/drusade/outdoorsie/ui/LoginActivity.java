@@ -48,6 +48,8 @@ import butterknife.ButterKnife;
       @SuppressLint("NonConstantResourceId")
       @BindView(R.id.firebaseProgressBar) ProgressBar mSignInProgressBar;
 
+      float v = 0;
+
       @Override
       protected void onCreate(Bundle savedInstanceState) {
           super.onCreate(savedInstanceState);
@@ -72,6 +74,22 @@ import butterknife.ButterKnife;
                   }
               }
           };
+
+          mEmailEditText.setTranslationX(300);
+          mPasswordEditText.setTranslationX(300);
+          mPasswordLoginButton.setTranslationY(300);
+          mRegisterTextView.setTranslationY(300);
+
+          mEmailEditText.setAlpha(v);
+          mPasswordEditText.setAlpha(v);
+          mPasswordLoginButton.setAlpha(v);
+          mRegisterTextView.setAlpha(v);
+
+          mEmailEditText.animate().translationX(0).alpha(1).setDuration(1000).setStartDelay(400).start();
+          mPasswordEditText.animate().translationX(0).alpha(1).setDuration(1000).setStartDelay(700).start();
+          mPasswordLoginButton.animate().translationY(0).alpha(1).setDuration(1000).setStartDelay(400).start();
+          mRegisterTextView.animate().translationY(0).alpha(1).setDuration(1000).setStartDelay(700).start();
+
       }
 
       @Override
