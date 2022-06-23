@@ -6,7 +6,7 @@ The users can then choose to join another users activities.
 
 ## Prerequisites
 * Laptop with minimum 8GB RAM and 500 GB disk space
-* Fast and reliabe internet connection
+* Fast and reliable internet connection
 
 ## Behaviour
 ###  Our application should:
@@ -38,7 +38,7 @@ The users can then choose to join another users activities.
 * [Gradle](https://gradle.org/)
 
 ## Known Bugs
-To date, there are no known bugs.
+Weather data is not available for some locations.
 
 ## Technologies Used
 * Java

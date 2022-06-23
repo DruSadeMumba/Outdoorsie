@@ -36,6 +36,5 @@ public class FirebaseActivityViewHolder extends RecyclerView.ViewHolder {
     public void bindActivities (AnActivity anAct) {
         mActivityTextView.setText(anAct.getActivityName());
         mLocationTextView.setText(anAct.getLocation());
-
     }
 }
